@@ -69,7 +69,6 @@ class CollectdCollector(object):
             run_cmd(['kill', pid])
         except FileNotFoundError:
             log('collectd pid not found - processes may still be running')
-        
 
     def result(self):
         return {}
