@@ -35,7 +35,7 @@ if __name__ == '__main__':
 
         # clone repository and build the sources
         repository = GitRepository(url=GIT_URL, path=REPOSITORY_PATH)
-        print(repository.current_branch())
+        #print(repository.current_branch())
 
         #if GIT_CLONE:
         #    repository.clone_or_update()
