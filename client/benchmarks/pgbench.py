@@ -170,7 +170,9 @@ class PgBench(object):
             rtag = "rw"
         rdir = "%s/pgbench-%s-%d-%d-%s" % (self._outdir, rtag, scale, nclients,
                                            str(run))
-        os.mkdir(rdir)
+        if not(os.path.exists(rdir)):
+         os.mkdir(rdir)
+
 
         args = ['pgbench', '-c', str(nclients), '-j', str(njobs), '-T',
                 str(duration)]
