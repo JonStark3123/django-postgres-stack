@@ -26,7 +26,7 @@ if __name__ == '__main__':
     with FileLock('.lock') as lock:
 
         if not(os.path.exists(REPOSITORY_PATH)):
-            os.mkdir(REPOSITORY_PATH)
+            os.makedirs(REPOSITORY_PATH)
 
         '''
         if not(os.path.exists(BIN_PATH)):
