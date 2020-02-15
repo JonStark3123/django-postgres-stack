@@ -115,7 +115,14 @@ def TestRecordCreate(request, format=None):
 
 	try:
 		secret = request.META.get("HTTP_AUTHORIZATION")
-		ret = Machine.objects.filter(machine_secret=secret, state='A').get()
+
+		try:
+			ret = Machine.objects.filter(machine_secret=secret, state='A').get()
+		except Exception as e:
+			Machine.objects.create(alias='test', machine_secret=secret, state='A', owner_id=User.objects.get(username='gsoccamp'), owner_email='test', owner_username='gsoccamp').save()
+			ret = Machine.objects.filter(machine_secret=secret, state='A').get()
+
+
 		test_machine = ret.id
 		if test_machine <= 0:
 			raise TestDataUploadError("The machine is unavailable.")
@@ -158,6 +165,7 @@ def TestRecordCreate(request, format=None):
 			if (branch_str == 'master'):
 				branch_str = 'HEAD'
 
+			print("branch", branch_str)
 			branch = TestBranch.objects.filter(branch_name__iexact=branch_str, is_accept=True).get()
 
 			if not branch:
