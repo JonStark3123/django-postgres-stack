@@ -3,10 +3,10 @@ import sys
 
 # global configuration/Users/chenzhang
 GIT_URL = 'https://gitee.com/purpleyu/postgres.git'
-REPOSITORY_PATH = '$HOME/git-postgres/'
-BUILD_PATH = '$HOME/anaconda3'
+REPOSITORY_PATH = '/home/susan/PythonClass/django-postgres-stack/client/tmp/git-postgres'
+BUILD_PATH = '/usr/lib/postgresql/11'
 BIN_PATH = os.path.join(BUILD_PATH, 'bin')
-DATADIR_PATH = '$HOME/data-postgres'
+DATADIR_PATH = '/home/susan/PythonClass/django-postgres-stack/client/tmp/data-postgres'
 
 POSTGRES_CONFIG = {
     'shared_buffers': '1GB',
