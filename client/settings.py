@@ -1,12 +1,12 @@
 import os
 import sys
 
-# global configuration
-GIT_URL = 'https://github.com/postgres/postgres.git'
-REPOSITORY_PATH = '/tmp/git-postgres'
-BUILD_PATH = '/Users/chenzhang/anaconda3'
+# global configuration/Users/chenzhang
+GIT_URL = 'https://gitee.com/purpleyu/postgres.git'
+REPOSITORY_PATH = '$HOME/git-postgres/'
+BUILD_PATH = '$HOME/anaconda3'
 BIN_PATH = os.path.join(BUILD_PATH, 'bin')
-DATADIR_PATH = '/tmp/data-postgres'
+DATADIR_PATH = '$HOME/data-postgres'
 
 POSTGRES_CONFIG = {
     'shared_buffers': '1GB',

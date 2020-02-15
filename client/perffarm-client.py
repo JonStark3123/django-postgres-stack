@@ -19,6 +19,9 @@ from utils import logging
 
 from settings_local import *
 from settings import *
+
+from client.settings import REPOSITORY_PATH
+
 API_URL = 'http://127.0.0.1:8000/'
 MACHINE_SECRET = '610f79063e62e6ad09460ac2c4e66da0386dc89b'
 if __name__ == '__main__':
