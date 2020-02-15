@@ -10,7 +10,6 @@ from rest_framework.pagination import PageNumberPagination
 from records.exception import TestDataUploadError
 from records.filters import TestRecordListFilter
 from machines.models import Machine
-from django.contrib.auth.models import User
 from records.models import TestCategory, TestBranch
 from rest_api.settings import DB_ENUM
 from records.serializers import *
@@ -116,14 +115,7 @@ def TestRecordCreate(request, format=None):
 
 	try:
 		secret = request.META.get("HTTP_AUTHORIZATION")
-		
-		try:
-			ret = Machine.objects.filter(machine_secret=secret, state='A').get()
-		except Exception as e:
-			Machine.objects.create(alias='test', machine_secret=secret, state='A', owner_id=User.objects.get(username='gsoccamp'), owner_email='test', owner_username='gsoccamp').save()
-			ret = Machine.objects.filter(machine_secret=secret, state='A').get()
-
-
+		ret = Machine.objects.filter(machine_secret=secret, state='A').get()
 		test_machine = ret.id
 		if test_machine <= 0:
 			raise TestDataUploadError("The machine is unavailable.")
@@ -166,7 +158,6 @@ def TestRecordCreate(request, format=None):
 			if (branch_str == 'master'):
 				branch_str = 'HEAD'
 
-			print("branch", branch_str)
 			branch = TestBranch.objects.filter(branch_name__iexact=branch_str, is_accept=True).get()
 
 			if not branch:

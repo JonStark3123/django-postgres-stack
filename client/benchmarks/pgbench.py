@@ -173,7 +173,6 @@ class PgBench(object):
         if not(os.path.exists(rdir)):
          os.mkdir(rdir)
 
-
         args = ['pgbench', '-c', str(nclients), '-j', str(njobs), '-T',
                 str(duration)]
 
