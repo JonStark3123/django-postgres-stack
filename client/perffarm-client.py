@@ -19,8 +19,10 @@ from utils import logging
 
 from settings_local import *
 from settings import *
-API_URL = 'http://127.0.0.1:8000/'
-MACHINE_SECRET = '610f79063e62e6ad09460ac2c4e66da0386dc89b'
+# API_URL = 'http://127.0.0.1:8000/'
+API_URL = 'http://127.0.0.1:8000/upload/'
+#MACHINE_SECRET = '610f79063e62e6ad09460ac2c4e66da0386dc89b'
+MACHINE_SECRET = 'e984c3017cd1a0dff0ef9f0c394a5c285e421411'
 if __name__ == '__main__':
 
     with FileLock('.lock') as lock:
@@ -34,8 +36,9 @@ if __name__ == '__main__':
         '''
 
         # clone repository and build the sources
+        print(0000000000000000000000000)
         repository = GitRepository(url=GIT_URL, path=REPOSITORY_PATH)
-        print(repository.current_branch())
+        print(repository.current_branch())#we are in django-...,but not postgre repo
 
         #if GIT_CLONE:
         #    repository.clone_or_update()
@@ -70,8 +73,8 @@ if __name__ == '__main__':
         PGBENCH_CONFIG['results_dir'] = OUTPUT_DIR
         runner.register_config('pgbench-basic',
                                'pgbench',
-                               repository.current_branch(),
-                               repository.current_commit(),
+                               'master',
+                               'akfhdfwiowhqgjog',
                                dbname=DATABASE_NAME,
                                bin_path=('%s/bin' % (BUILD_PATH,)),
                                postgres_config=POSTGRES_CONFIG,

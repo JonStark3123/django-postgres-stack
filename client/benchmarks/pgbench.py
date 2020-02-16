@@ -214,7 +214,7 @@ class PgBench(object):
         # derive configuration for the CPU count / RAM size
         configs = PgBench._configure(cpu_count(), available_ram())
 
-        results = {'ro': {}, 'rw': {}}
+        results = {'ro': {}, 'rw': {}}  #ro:read only  rw:read-write
         j = 0
         for config in configs:
             scale = config['scale']
@@ -223,6 +223,7 @@ class PgBench(object):
                 results['ro'][scale] = {}
             if scale not in results['rw']:
                 results['rw'][scale] = {}
+            #print(results)
 
             # init for the dataset scale and warmup
             self._init(scale)

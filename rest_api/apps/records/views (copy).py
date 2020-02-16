@@ -106,19 +106,16 @@ def TestRecordCreate(request, format=None):
 	Receive data from client
 	"""
 	data = request.data
-	print(22222222)
 
 	json_data = json.dumps(data[0], ensure_ascii=False)
 	json_data = json.loads(json_data)
 	# obj = data[0].pgbench
 	# jsLoads = json.loads(data[0])
-	# print(json_data)
 
 	from django.db import transaction
 
 	try:
 		secret = request.META.get("HTTP_AUTHORIZATION")
-		print(33333333)
 		# ret = Machine.objects.filter(machine_secret=secret, state='A').get()
 		try:
 			ret = Machine.objects.filter(machine_secret=secret, state='A').get()
@@ -127,7 +124,7 @@ def TestRecordCreate(request, format=None):
 									owner_id=User.objects.get(username='gsoccamp'), owner_email='test',
 									owner_username='gsoccamp').save()
 			ret = Machine.objects.filter(machine_secret=secret, state='A').get()
-		# print(ret)
+			# print(ret)
 
 		test_machine = ret.id
 		if test_machine <= 0:
