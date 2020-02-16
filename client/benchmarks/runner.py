@@ -83,7 +83,7 @@ class BenchmarkRunner(object):
         # expand the attribute names
         bench = bench(**config['config'])
 
-        self._cluster.start(config=config['postgres'])
+        self._cluster.start(config=config['postgres']) #obtain the database name pgperffarm-db l44 'postgres': postgres_config,
 
         # start collector(s) of additional info
         self._collector.start()
@@ -143,8 +143,10 @@ class BenchmarkRunner(object):
         post.append(postdata)
 
         headers = {'Content-Type': 'application/json; charset=utf-8', 'Authorization': self._secret}
+        print(1)
         r = requests.post(self._url.encode('utf-8'), data=json.dumps(post).encode('utf-8'), headers=headers)
-
+        print(self._url)
+        # print(post)
 
     def run(self):
         'run all the configured benchmarks'
