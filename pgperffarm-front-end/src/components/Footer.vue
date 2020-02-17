@@ -1,11 +1,11 @@
 <template>
-<v-footer 
-	fixed 
+<v-footer
+	fixed
 	color="rgb(51, 103, 145)"
 	height="7.5%"
 	>
 	<v-card-text class="pg-v-card-text-footer">
-		Google Summer Of Code 2019 @ Postgres &mdash; Ilaria Battiston
+		Google Summer Of Code 2019 @ Postgres
 	</v-card-text>
 </v-footer>
 </template>
