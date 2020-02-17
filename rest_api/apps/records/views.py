@@ -18,6 +18,8 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework import mixins, status, permissions
 
+from django.contrib.auth.models import User
+
 from rest_framework import viewsets
 from .models import TestRecord
 import json
@@ -105,19 +107,25 @@ def TestRecordCreate(request, format=None):
 	Receive data from client
 	"""
 	data = request.data
-
+	
 	json_data = json.dumps(data[0], ensure_ascii=False)
 	json_data = json.loads(json_data)
-	# obj = data[0].pgbench
-	# jsLoads = json.loads(data[0])
 
 	from django.db import transaction
-
 	try:
 		secret = request.META.get("HTTP_AUTHORIZATION")
-		ret = Machine.objects.filter(machine_secret=secret, state='A').get()
-		test_machine = ret.id
-		if test_machine <= 0:
+		print(secret)
+		test_machine = None
+		try:
+			ret = Machine.objects.filter(machine_secret=secret).get()
+			test_machine = ret.id
+		except Machine.DoesNotExist:
+			current_user = User.objects.get(username='gsoccamp')
+			new_machine = Machine.objects.create(alias='dummy_alias',machine_secret=secret,sn='dummy_sn',os_name='dummy_os_name',os_version='dummy_os_version',comp_name='dummy_comp_name',comp_version='dummy_comp_version',state='Inactive',owner_id=current_user,owner_email='dummy_owner_email',owner_username='dummy_owner_username')
+			new_machine.save()
+			ret = Machine.objects.filter(machine_secret=secret).get()
+			test_machine = ret.id
+		if test_machine == None or test_machine <= 0:
 			raise TestDataUploadError("The machine is unavailable.")
 
 		record_hash = make_password(str(json_data), 'pg_perf_farm')
@@ -125,10 +133,10 @@ def TestRecordCreate(request, format=None):
 		if r != 0:
 			raise TestDataUploadError('The same record already exists, please do not submit it twice.')
 
+		print("Atomic transaction begins.")
 		with transaction.atomic():
 
 			if 'linux' not in json_data:
-				print('linuxInfo not found')
 				linuxInfo = LinuxInfoSerializer(data={'mounts': 'none', 'cpuinfo': 'none', 'sysctl': 'none', 'meminfo': 'none'})
 
 			else:
@@ -142,7 +150,6 @@ def TestRecordCreate(request, format=None):
 			else:
 				msg = 'linuxInfo invalid'
 				raise TestDataUploadError(msg)
-
 			meta_data = json_data['meta']
 			metaInfo = MetaInfoSerializer(data=meta_data)
 			metaInfoRet = None
@@ -157,8 +164,14 @@ def TestRecordCreate(request, format=None):
 
 			if (branch_str == 'master'):
 				branch_str = 'HEAD'
-
-			branch = TestBranch.objects.filter(branch_name__iexact=branch_str, is_accept=True).get()
+			
+			branch = None
+			try:
+				branch = TestBranch.objects.filter(branch_name__iexact=branch_str, is_accept=True).get()
+			except TestBranch.DoesNotExist:
+				new_branch = TestBranch.objects.create(branch_name=branch_str,branch_order=5, is_show=True, is_accept=True)
+				new_branch.save()
+				branch = TestBranch.objects.filter(branch_name__iexact=branch_str, is_accept=True).get()
 
 			if not branch:
 				raise TestDataUploadError('The branch name is unavailable.')
@@ -167,7 +180,6 @@ def TestRecordCreate(request, format=None):
 			pg_settings = pg_data['settings']
 
 			filtered = ['checkpoint_timeout','work_mem','shared_buffers','maintenance_work_mem','max_wal_size','min_wal_size']
-
 			for item in filtered:
 				if item.isdigit():
 					pg_settings[item] = int(pg_settings[item])
@@ -184,7 +196,7 @@ def TestRecordCreate(request, format=None):
 			else:
 				msg = pgInfo.errors
 				raise TestDataUploadError(msg)
-
+			print("test record data begins")
 			test_record_data = {
 				'pg_info': pgInfoRet.id,
 				'linux_info': linuxInfoRet.id,
@@ -215,10 +227,13 @@ def TestRecordCreate(request, format=None):
 
 			#for tag, tag_list in pgbench.iteritems():
 			for tag, tag_list in pgbench.items():
-				#print(tag)
-				#print(tag_list)
-
-				test_cate = TestCategory.objects.get(cate_sn=tag)
+				test_cate=None
+				try:
+					test_cate = TestCategory.objects.get(cate_sn=tag)
+				except TestCategory.DoesNotExist:
+					new_test_cate = TestCategory.objects.create(cate_sn=tag, cate_name=tag+"_category", cate_order=1)
+					new_test_cate.save()
+					test_cate = TestCategory.objects.get(cate_sn=tag)
 
 				if not test_cate:
 					continue
