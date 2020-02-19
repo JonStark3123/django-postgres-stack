@@ -116,16 +116,16 @@ class BenchmarkRunner(object):
         uname = check_output(['uname', '-a'])
 
         r['meta'] = {
-                'benchmark': config['benchmark'],
-                'date': strftime("%Y-%m-%d %H:%M:%S.000000+00", gmtime()),
-                'name': config_name,
-                'uname': uname,
+            'benchmark': config['benchmark'],
+            'date': strftime("%Y-%m-%d %H:%M:%S.000000+00", gmtime()),
+            'name': config_name,
+            'uname': uname,
         }
 
         r['postgres'] = {
-                'branch': config['branch'],
-                'commit': config['commit'],
-                'settings': config['postgres'],
+            'branch': config['branch'],
+            'commit': config['commit'],
+            'settings': config['postgres'],
         }
 
         with open('%s/results.json' % self._output, 'w') as f:
@@ -134,23 +134,23 @@ class BenchmarkRunner(object):
         try:
             self._upload_results(r)
         except Exception as e:
-            print (e)
+            print(e)
 
     def _upload_results(self, results):
 
-        postdata = results  
-        post = []  
+        postdata = results
+        post = []
         post.append(postdata)
-
+        PATH_URL = 'upload/'
+        url = self._url + PATH_URL
         headers = {'Content-Type': 'application/json; charset=utf-8', 'Authorization': self._secret}
-        r = requests.post(self._url.encode('utf-8'), data=json.dumps(post).encode('utf-8'), headers=headers)
-
+        r = requests.post(url.encode('utf-8'), data=json.dumps(post).encode('utf-8'), headers=headers)
 
     def run(self):
         'run all the configured benchmarks'
 
         # Removing the existing directory
-        
+
         try:
             os.mkdir(self._output)
         except OSError as e:
