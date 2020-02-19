@@ -35,6 +35,15 @@ PGBENCH_CONFIG = {
     'csv': False
 }
 
+# Benchmarking options for PgBench
+# clients - number of concurrent database sessions
+# threads - number of worker threads within PgBench
+PGBENCH_BENCHMARKING_OPTIONS = {
+    'scale': 10,
+    'clients': [2, 4, 8],
+    'threads': 1
+}
+
 # ignore missing file with local config
 try:
     from settings_local import *
