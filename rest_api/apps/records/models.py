@@ -10,10 +10,11 @@ class TestBranch(models.Model):
     """
     test branch
     """
-    branch_name = models.CharField(max_length=128, unique=True,verbose_name="branch name", help_text="branch name")
-    branch_order = models.IntegerField(default=5,verbose_name="branch order", help_text="order in all the  branch")
-    is_show = models.BooleanField(verbose_name="branch is shown", default=True, help_text="branch isshow")
-    is_accept = models.BooleanField(verbose_name="branch accepts new reports", default=True, help_text="branch accepts new reports")
+    branch_name = models.CharField(max_length=128, unique=True, verbose_name="branch name", help_text="branch name")
+    branch_order = models.IntegerField(default=5, verbose_name="branch order", help_text="order in all the  branch")
+    is_show = models.BooleanField(verbose_name="branch is shown", default=True, help_text="branch is show")
+    is_accept = models.BooleanField(verbose_name="branch accepts new reports", default=True,
+                                    help_text="branch accepts new reports")
     add_time = models.DateTimeField(default=timezone.now, verbose_name="branch added time",
                                     help_text="branch added time")
 
@@ -43,23 +44,27 @@ class TestCategory(models.Model):
 
 
 class PGInfo(models.Model):
-
-    checkpoint_timeout = models.CharField(max_length=32, verbose_name="checkpoint_timeout", help_text="checkpoint_timeout")
+    checkpoint_timeout = models.CharField(max_length=32, verbose_name="checkpoint_timeout",
+                                          help_text="checkpoint_timeout")
     log_temp_files = models.IntegerField(verbose_name="log_temp_files", help_text="log_temp_files")
     work_mem = models.CharField(max_length=32, verbose_name="work_mem", help_text="work_mem")
-    log_line_prefix = models.CharField(max_length=64,verbose_name="checkpoint_timeout", help_text="checkpoint_timeout")
+    log_line_prefix = models.CharField(max_length=64, verbose_name="checkpoint_timeout", help_text="checkpoint_timeout")
     shared_buffers = models.CharField(max_length=32, verbose_name="shared_buffers", help_text="shared_buffers")
-    log_autovacuum_min_duration =models.IntegerField(verbose_name="log_autovacuum_min_duration", help_text="log_autovacuum_min_duration")
+    log_autovacuum_min_duration = models.IntegerField(verbose_name="log_autovacuum_min_duration",
+                                                      help_text="log_autovacuum_min_duration")
 
-
-    checkpoint_completion_target = models.DecimalField(max_digits=8, decimal_places=4,verbose_name="checkpoint_completion_target", help_text="checkpoint_completion_target")
-    maintenance_work_mem = models.CharField(max_length=32, verbose_name="maintenance_work_mem", help_text="maintenance_work_mem")
+    checkpoint_completion_target = models.DecimalField(max_digits=8, decimal_places=4,
+                                                       verbose_name="checkpoint_completion_target",
+                                                       help_text="checkpoint_completion_target")
+    maintenance_work_mem = models.CharField(max_length=32, verbose_name="maintenance_work_mem",
+                                            help_text="maintenance_work_mem")
 
     SWITCH_CHOICE = (
         (1, 'on'),
         (2, 'off')
     )
-    log_checkpoints = models.IntegerField(choices=SWITCH_CHOICE,verbose_name="log_checkpoints", help_text="log_checkpoints")
+    log_checkpoints = models.IntegerField(choices=SWITCH_CHOICE, verbose_name="log_checkpoints",
+                                          help_text="log_checkpoints")
     max_wal_size = models.CharField(max_length=32, verbose_name="max_wal_size", help_text="max_wal_size")
     min_wal_size = models.CharField(max_length=32, verbose_name="min_wal_size", help_text="min_wal_size")
 
@@ -157,6 +162,24 @@ class TestDataSet(models.Model):
         verbose_name_plural = "test dataset"
 
 
+class PGTransaction(models.Model):
+    test_dataset = models.ForeignKey(TestDataSet, verbose_name="test dataset id", help_text="test dataset id")
+    scale = models.IntegerField(verbose_name="scale", help_text="current scale factor")
+    num_branches = models.IntegerField(verbose_name="number of branches", help_text="number of branches")
+    num_tellers = models.IntegerField(verbose_name="number of tellers", help_text="number of tellers")
+    num_accounts = models.IntegerField(verbose_name="number of accounts", help_text="number of accounts")
+    aid = models.DecimalField(max_digits=18, decimal_places=8, verbose_name="aid", help_text="aid")
+    bid = models.DecimalField(max_digits=18, decimal_places=8, verbose_name="bid", help_text="bid")
+    tid = models.DecimalField(max_digits=18, decimal_places=8, verbose_name="tid", help_text="tid")
+    delta = models.DecimalField(max_digits=18, decimal_places=8, verbose_name="delta", help_text="delta")
+
+    add_time = models.DateTimeField(default=timezone.now, verbose_name="test dataset time")
+
+    class Meta:
+        verbose_name = "PG Transaction"
+        verbose_name_plural = "PG Transaction"
+
+
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 
@@ -169,7 +192,7 @@ def calc_status(sender, instance, **kwargs):
     machine_id = instance.test_record.test_machine_id
     add_time = instance.test_record.add_time
     branch = instance.test_record.branch
-    prevRecord = TestRecord.objects.order_by('-add_time').filter(test_machine_id=machine_id,branch=branch,
+    prevRecord = TestRecord.objects.order_by('-add_time').filter(test_machine_id=machine_id, branch=branch,
                                                                  add_time__lt=add_time).first()
     if (prevRecord == None):
         print("prev record not found")
@@ -199,7 +222,6 @@ def calc_status(sender, instance, **kwargs):
 
 
 class TestResult(models.Model):
-
     test_dataset = models.ForeignKey(TestDataSet, verbose_name="test dataset id", help_text="test dataset id")
     latency = models.IntegerField(verbose_name="latency", help_text="latency of the test result")
     scale = models.IntegerField(verbose_name="scale", help_text="scale of the test result")
@@ -224,3 +246,13 @@ class TestResult(models.Model):
     class Meta:
         verbose_name = "test result"
         verbose_name_plural = "test result"
+
+# transaction type: TPC-B (sort of) ----??
+# scaling factor: 10 ---scale
+# query mode: simple ---mode
+# number of clients: 10 ---client
+# number of threads: 1  ----thread
+# number of transactions per client: 1000 -----run???
+# number of transactions actually processed: 10000/10000
+# tps = 85.184871 (including connections establishing)
+# tps = 85.296346 (excluding connections establishing)

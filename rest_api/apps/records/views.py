@@ -106,19 +106,16 @@ def TestRecordCreate(request, format=None):
 	Receive data from client
 	"""
 	data = request.data
-	print(22222222)
 
 	json_data = json.dumps(data[0], ensure_ascii=False)
 	json_data = json.loads(json_data)
 	# obj = data[0].pgbench
 	# jsLoads = json.loads(data[0])
-	# print(json_data)
 
 	from django.db import transaction
 
 	try:
 		secret = request.META.get("HTTP_AUTHORIZATION")
-		print(33333333)
 		# ret = Machine.objects.filter(machine_secret=secret, state='A').get()
 		try:
 			ret = Machine.objects.filter(machine_secret=secret, state='A').get()
@@ -171,9 +168,6 @@ def TestRecordCreate(request, format=None):
 			if (branch_str == 'master'):
 				branch_str = 'HEAD'
 
-			# print("branch", branch_str)
-			# branch = TestBranch.objects.filter(branch_name__iexact=branch_str, is_accept=True).get()
-			# ret = Machine.objects.filter(machine_secret=secret, state='A').get()
 			try:
 				branch = TestBranch.objects.filter(branch_name__iexact=branch_str, is_accept=True).get()
 			except Exception as e:

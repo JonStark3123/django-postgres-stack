@@ -223,7 +223,6 @@ class PgBench(object):
                 results['ro'][scale] = {}
             if scale not in results['rw']:
                 results['rw'][scale] = {}
-            #print(results)
 
             # init for the dataset scale and warmup
             self._init(scale)

@@ -2,13 +2,11 @@ import os
 import sys
 
 # global configuration
-GIT_URL = 'https://gitee.com/purpleyu/postgres.git'
-REPOSITORY_PATH = '/raid/git-postgres'
-# REPOSITORY_PATH = '/home/guo/Documents/git-postgres/postgres'
+GIT_URL = 'https://gitee.com/purpleyu/postgres.git' #changed to a local repo
+REPOSITORY_PATH = '/raid/git-postgres/postgres'
 BUILD_PATH = '/usr/lib/postgresql/11'
 BIN_PATH = os.path.join(BUILD_PATH, 'bin')
-DATADIR_PATH = '/raid/data-postgres'
-# DATADIR_PATH = '/home/guo/Documents/git-postgres/postgres'
+DATADIR_PATH = '/raid/data-postgres/postgres'
 
 POSTGRES_CONFIG = {
     'shared_buffers': '1GB',
