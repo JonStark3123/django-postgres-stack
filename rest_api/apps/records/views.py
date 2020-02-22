@@ -121,7 +121,7 @@ def TestRecordCreate(request, format=None):
             test_machine = ret.id
         except Machine.DoesNotExist:
             current_user = User.objects.get(username='gsoccamp')
-            new_machine = Machine.objects.create(alias='dummy_alias', machine_secret=secret, sn='dummy_sn',
+            ne  w_machine = Machine.objects.create(alias='dummy_alias', machine_secret=secret, sn='dummy_sn',
                                                  os_name='dummy_os_name', os_version='dummy_os_version',
                                                  comp_name='dummy_comp_name', comp_version='dummy_comp_version',
                                                  state='Inactive', owner_id=current_user,

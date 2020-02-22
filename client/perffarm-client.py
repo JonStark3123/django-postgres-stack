@@ -11,6 +11,7 @@ from collectors.collectd import CollectdCollector
 from collectors.linux import LinuxCollector
 from collectors.postgres import PostgresCollector
 from collectors.collector import MultiCollector
+from collectors.scripts import ScriptCollector
 
 from utils.locking import FileLock
 from utils.git import GitRepository
@@ -54,6 +55,9 @@ if __name__ == '__main__':
         system = os.popen("uname").readlines()[0].split()[0]
         if system == 'Linux':
             collectors.register('linux', LinuxCollector(OUTPUT_DIR))
+
+        collectors.register('scripts',
+                            ScriptCollector(SCRIPTS_DIR))
 
         collectors.register('collectd',
                             CollectdCollector(OUTPUT_DIR, DATABASE_NAME, ''))

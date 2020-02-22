@@ -7,6 +7,7 @@ REPOSITORY_PATH = '/home/susan/PythonClass/django-postgres-stack/client/tmp/git-
 BUILD_PATH = '/usr/lib/postgresql/11'
 BIN_PATH = os.path.join(BUILD_PATH, 'bin')
 DATADIR_PATH = '/home/susan/PythonClass/django-postgres-stack/client/tmp/data-postgres'
+SCRIPTS_DIR='/home/susan/PythonClass/django-postgres-stack/client/tmp/files/'
 
 POSTGRES_CONFIG = {
     'shared_buffers': '1GB',
