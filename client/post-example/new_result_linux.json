@@ -1,22 +1,22 @@
 {
-  'results': {
-    'init': 6.884479761123657,
-    'runs': [
+  "results": {
+    "init": 6.884479761123657,
+    "runs": [
       
     ],
-    'warmup': None
+    "warmup": None
   },
-  'pgbench': {
-    'ro': {
+  "pgbench": {
+    "ro": {
       10: {
         1: {
-          'results': [
+          "results": [
             {
-              'scale': '10',
-              'mode': 'simple',
-              'clients': '1',
-              'threads': '1',
-              'duration': '600',
+              "scale": "10",
+              "mode": "simple",
+              "clients": "1",
+              "threads": "1",
+              "duration": "600",
               'latency': -1,
               'tps': '8368.570878',
               'read-only': True,
