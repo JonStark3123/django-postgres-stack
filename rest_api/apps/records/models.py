@@ -162,24 +162,6 @@ class TestDataSet(models.Model):
         verbose_name_plural = "test dataset"
 
 
-class PGTransaction(models.Model):
-    test_dataset = models.ForeignKey(TestDataSet, verbose_name="test dataset id", help_text="test dataset id")
-    scale = models.IntegerField(verbose_name="scale", help_text="current scale factor")
-    num_branches = models.IntegerField(verbose_name="number of branches", help_text="number of branches")
-    num_tellers = models.IntegerField(verbose_name="number of tellers", help_text="number of tellers")
-    num_accounts = models.IntegerField(verbose_name="number of accounts", help_text="number of accounts")
-    aid = models.DecimalField(max_digits=18, decimal_places=8, verbose_name="aid", help_text="aid")
-    bid = models.DecimalField(max_digits=18, decimal_places=8, verbose_name="bid", help_text="bid")
-    tid = models.DecimalField(max_digits=18, decimal_places=8, verbose_name="tid", help_text="tid")
-    delta = models.DecimalField(max_digits=18, decimal_places=8, verbose_name="delta", help_text="delta")
-
-    add_time = models.DateTimeField(default=timezone.now, verbose_name="test dataset time")
-
-    class Meta:
-        verbose_name = "PG Transaction"
-        verbose_name_plural = "PG Transaction"
-
-
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 
@@ -207,9 +189,9 @@ def calc_status(sender, instance, **kwargs):
     percentage = (instance.metric - prevTestDataSet.metric) / prevTestDataSet.metric
 
     status = 0
-    if (percentage >= 0.05):
+    if percentage >= 0.05:
         status = 1
-    elif (percentage <= -0.05):
+    elif percentage <= -0.05:
         status = 3
     else:
         status = 2
@@ -223,13 +205,15 @@ def calc_status(sender, instance, **kwargs):
 
 class TestResult(models.Model):
     test_dataset = models.ForeignKey(TestDataSet, verbose_name="test dataset id", help_text="test dataset id")
+    # customScripts = models.CharField(max_length=10000, verbose_name="custom scripts",
+    #                                help_text="custom scripts", default="TPC-B")
     latency = models.IntegerField(verbose_name="latency", help_text="latency of the test result")
     scale = models.IntegerField(verbose_name="scale", help_text="scale of the test result")
     end = models.DecimalField(max_digits=32, decimal_places=12, verbose_name="end",
-                              help_text="endtime of the test result")
+                              help_text="end time of the test result")
     clients = models.IntegerField(verbose_name="clients", help_text="clients of the test result")
     start = models.DecimalField(max_digits=32, decimal_places=12, verbose_name="start",
-                                help_text="starttime of the test result")
+                                help_text="start time of the test result")
     tps = models.DecimalField(default=0, max_digits=18, decimal_places=6, verbose_name="tps",
                               help_text="tps of the test result")
     run = models.IntegerField(verbose_name="run", help_text="run number")
@@ -246,13 +230,3 @@ class TestResult(models.Model):
     class Meta:
         verbose_name = "test result"
         verbose_name_plural = "test result"
-
-# transaction type: TPC-B (sort of) ----??
-# scaling factor: 10 ---scale
-# query mode: simple ---mode
-# number of clients: 10 ---client
-# number of threads: 1  ----thread
-# number of transactions per client: 1000 -----run???
-# number of transactions actually processed: 10000/10000
-# tps = 85.184871 (including connections establishing)
-# tps = 85.296346 (excluding connections establishing)
