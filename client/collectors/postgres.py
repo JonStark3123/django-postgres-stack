@@ -6,6 +6,8 @@ import psycopg2.extras
 import time
 
 from multiprocessing import Process, Queue
+
+from settings_local import DATABASES
 from utils.logging import log
 from utils.misc import run_cmd
 
@@ -24,7 +26,7 @@ class PostgresCollector(object):
     def start(self):
         log("saving postgres settings")
         try:
-            conn = psycopg2.connect('host=localhost dbname=%s' % self._dbname)
+            conn = psycopg2.connect('dbname={} user={} password={} host=localhost'.format(DATABASES['default']['NAME'], DATABASES['default']['USER'],DATABASES['default']['PASSWORD']))
             cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
             cur.execute(
                 'SELECT name, setting, source '

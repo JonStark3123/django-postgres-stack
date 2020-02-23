@@ -21,7 +21,7 @@ if __name__ == '__main__':
     # subprocess.call(['pgbench', '-i', '-s', '10', DBNAME])
     # psycopg2.connect(database="testdb", user="postgres", password="cohondob", host="127.0.0.1", port="5432")
     try:
-        conn = psycopg2.connect('dbname={} user={} password={} host={} port={}'.format(DBNAME, DBUSER,DBPASSWORD,DBHOST,DBPOT))
+            conn = psycopg2.connect('dbname={} user={} password={} host=localhost'.format(DBNAME, DBUSER,DBPASSWORD))
     except Exception as e:
         print("[!] ", e)
     else:
