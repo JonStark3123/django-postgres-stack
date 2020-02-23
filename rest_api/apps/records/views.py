@@ -280,6 +280,7 @@ def TestRecordCreate(request, format=None):
                             test_result_data = test_result
                             test_result_data['test_dataset'] = testDateSetRet.id
                             test_result_data['mode'] = DB_ENUM['mode'][test_result_data['mode']]
+                            test_result_data['customScripts'] = json.dumps(test_result_data['customScripts'])
                             testResult = CreateTestResultSerializer(data=test_result_data)
 
                             testResultRet = None

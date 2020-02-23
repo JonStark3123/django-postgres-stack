@@ -20,8 +20,8 @@
                             "read-only": true,
                             "start": 1582303162.200553,
                             "end": 1582303162.234366,
-                            "run": 0
-	           "customScript": {"content": ["\\set nbranches :scale\n", "\\set ntellers 10 * :scale\n", "\\set naccounts 100000 * :scale\n", "\\setrandom aid 1 :naccounts\n", "\\setrandom bid 1 :nbranches\n", "\\setrandom tid 1 :ntellers\n", "\\setrandom delta -5000 5000\n", "INSERT INTO pgbench_histor (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP); (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP);"], "scriptName": "/home/susan/PythonClass/django-postgres-stack/client/tmp/files/insert.sql"}
+                            "run": 0,
+	           "customScripts": {"content": ["\\set nbranches :scale\n", "\\set ntellers 10 * :scale\n", "\\set naccounts 100000 * :scale\n", "\\setrandom aid 1 :naccounts\n", "\\setrandom bid 1 :nbranches\n", "\\setrandom tid 1 :ntellers\n", "\\setrandom delta -5000 5000\n", "INSERT INTO pgbench_histor (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP); (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP);"], "scriptName": "/home/susan/PythonClass/django-postgres-stack/client/tmp/files/insert.sql"}
 
                         },
                         {
@@ -35,8 +35,8 @@
                             "read-only": true,
                             "start": 1582303162.471972,
                             "end": 1582303162.4997017,
-                            "run": 1
-                            "customScript": {"content": ["\\set nbranches :scale\n", "\\set ntellers 10 * :scale\n", "\\set naccounts 100000 * :scale\n", "\\setrandom aid 1 :naccounts\n", "\\setrandom bid 1 :nbranches\n", "\\setrandom tid 1 :ntellers\n", "\\setrandom delta -5000 5000\n", "INSERT INTO pgbench_histor (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP); (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP);"], "scriptName": "/home/susan/PythonClass/django-postgres-stack/client/tmp/files/insert.sql"}
+                            "run": 1,
+                            "customScripts": {"content": ["\\set nbranches :scale\n", "\\set ntellers 10 * :scale\n", "\\set naccounts 100000 * :scale\n", "\\setrandom aid 1 :naccounts\n", "\\setrandom bid 1 :nbranches\n", "\\setrandom tid 1 :ntellers\n", "\\setrandom delta -5000 5000\n", "INSERT INTO pgbench_histor (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP); (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP);"], "scriptName": "/home/susan/PythonClass/django-postgres-stack/client/tmp/files/insert.sql"}
                         },
                         {
                             "scale": -1,
@@ -49,8 +49,8 @@
                             "read-only": true,
                             "start": 1582303162.7035756,
                             "end": 1582303162.7299218,
-                            "run": 2
-                            "customScript": {"content": ["\\set nbranches :scale\n", "\\set ntellers 10 * :scale\n", "\\set naccounts 100000 * :scale\n", "\\setrandom aid 1 :naccounts\n", "\\setrandom bid 1 :nbranches\n", "\\setrandom tid 1 :ntellers\n", "\\setrandom delta -5000 5000\n", "INSERT INTO pgbench_histor (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP); (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP);"], "scriptName": "/home/susan/PythonClass/django-postgres-stack/client/tmp/files/insert.sql"}
+                            "run": 2,
+                            "customScripts": {"content": ["\\set nbranches :scale\n", "\\set ntellers 10 * :scale\n", "\\set naccounts 100000 * :scale\n", "\\setrandom aid 1 :naccounts\n", "\\setrandom bid 1 :nbranches\n", "\\setrandom tid 1 :ntellers\n", "\\setrandom delta -5000 5000\n", "INSERT INTO pgbench_histor (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP); (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP);"], "scriptName": "/home/susan/PythonClass/django-postgres-stack/client/tmp/files/insert.sql"}
                         }
                     ],
                     "metric": -1.0,
@@ -70,8 +70,8 @@
                             "read-only": true,
                             "start": 1582303162.2679288,
                             "end": 1582303162.3251255,
-                            "run": 0
-                            "customScript": {"content": ["\\set nbranches :scale\n", "\\set ntellers 10 * :scale\n", "\\set naccounts 100000 * :scale\n", "\\setrandom aid 1 :naccounts\n", "\\setrandom bid 1 :nbranches\n", "\\setrandom tid 1 :ntellers\n", "\\setrandom delta -5000 5000\n", "INSERT INTO pgbench_histor (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP); (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP);"], "scriptName": "/home/susan/PythonClass/django-postgres-stack/client/tmp/files/insert.sql"}
+                            "run": 0,
+                            "customScripts": {"content": ["\\set nbranches :scale\n", "\\set ntellers 10 * :scale\n", "\\set naccounts 100000 * :scale\n", "\\setrandom aid 1 :naccounts\n", "\\setrandom bid 1 :nbranches\n", "\\setrandom tid 1 :ntellers\n", "\\setrandom delta -5000 5000\n", "INSERT INTO pgbench_histor (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP); (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP);"], "scriptName": "/home/susan/PythonClass/django-postgres-stack/client/tmp/files/insert.sql"}
                         },
                         {
                             "scale": -1,
@@ -84,8 +84,8 @@
                             "read-only": true,
                             "start": 1582303162.530046,
                             "end": 1582303162.5586827,
-                            "run": 1
-                            "customScript": {"content": ["\\set nbranches :scale\n", "\\set ntellers 10 * :scale\n", "\\set naccounts 100000 * :scale\n", "\\setrandom aid 1 :naccounts\n", "\\setrandom bid 1 :nbranches\n", "\\setrandom tid 1 :ntellers\n", "\\setrandom delta -5000 5000\n", "INSERT INTO pgbench_histor (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP); (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP);"], "scriptName": "/home/susan/PythonClass/django-postgres-stack/client/tmp/files/insert.sql"}
+                            "run": 1,
+                            "customScripts": {"content": ["\\set nbranches :scale\n", "\\set ntellers 10 * :scale\n", "\\set naccounts 100000 * :scale\n", "\\setrandom aid 1 :naccounts\n", "\\setrandom bid 1 :nbranches\n", "\\setrandom tid 1 :ntellers\n", "\\setrandom delta -5000 5000\n", "INSERT INTO pgbench_histor (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP); (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP);"], "scriptName": "/home/susan/PythonClass/django-postgres-stack/client/tmp/files/insert.sql"}
                         },
                         {
                             "scale": -1,
@@ -98,8 +98,8 @@
                             "read-only": true,
                             "start": 1582303162.7649987,
                             "end": 1582303162.8144364,
-                            "run": 2
-                            "customScript": {"content": ["\\set nbranches :scale\n", "\\set ntellers 10 * :scale\n", "\\set naccounts 100000 * :scale\n", "\\setrandom aid 1 :naccounts\n", "\\setrandom bid 1 :nbranches\n", "\\setrandom tid 1 :ntellers\n", "\\setrandom delta -5000 5000\n", "INSERT INTO pgbench_histor (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP); (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP);"], "scriptName": "/home/susan/PythonClass/django-postgres-stack/client/tmp/files/insert.sql"}
+                            "run": 2,
+                            "customScripts": {"content": ["\\set nbranches :scale\n", "\\set ntellers 10 * :scale\n", "\\set naccounts 100000 * :scale\n", "\\setrandom aid 1 :naccounts\n", "\\setrandom bid 1 :nbranches\n", "\\setrandom tid 1 :ntellers\n", "\\setrandom delta -5000 5000\n", "INSERT INTO pgbench_histor (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP); (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP);"], "scriptName": "/home/susan/PythonClass/django-postgres-stack/client/tmp/files/insert.sql"}
                         }
                     ],
                     "metric": -1.0,
@@ -119,8 +119,8 @@
                             "read-only": true,
                             "start": 1582303162.3752975,
                             "end": 1582303162.4115512,
-                            "run": 0
-                            "customScript": {"content": ["\\set nbranches :scale\n", "\\set ntellers 10 * :scale\n", "\\set naccounts 100000 * :scale\n", "\\setrandom aid 1 :naccounts\n", "\\setrandom bid 1 :nbranches\n", "\\setrandom tid 1 :ntellers\n", "\\setrandom delta -5000 5000\n", "INSERT INTO pgbench_histor (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP); (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP);"], "scriptName": "/home/susan/PythonClass/django-postgres-stack/client/tmp/files/insert.sql"}
+                            "run": 0,
+                            "customScripts": {"content": ["\\set nbranches :scale\n", "\\set ntellers 10 * :scale\n", "\\set naccounts 100000 * :scale\n", "\\setrandom aid 1 :naccounts\n", "\\setrandom bid 1 :nbranches\n", "\\setrandom tid 1 :ntellers\n", "\\setrandom delta -5000 5000\n", "INSERT INTO pgbench_histor (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP); (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP);"], "scriptName": "/home/susan/PythonClass/django-postgres-stack/client/tmp/files/insert.sql"}
                         },
                         {
                             "scale": -1,
@@ -133,8 +133,8 @@
                             "read-only": true,
                             "start": 1582303162.5960984,
                             "end": 1582303162.656254,
-                            "run": 1
-                            "customScript": {"content": ["\\set nbranches :scale\n", "\\set ntellers 10 * :scale\n", "\\set naccounts 100000 * :scale\n", "\\setrandom aid 1 :naccounts\n", "\\setrandom bid 1 :nbranches\n", "\\setrandom tid 1 :ntellers\n", "\\setrandom delta -5000 5000\n", "INSERT INTO pgbench_histor (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP); (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP);"], "scriptName": "/home/susan/PythonClass/django-postgres-stack/client/tmp/files/insert.sql"}
+                            "run": 1,
+                            "customScripts": {"content": ["\\set nbranches :scale\n", "\\set ntellers 10 * :scale\n", "\\set naccounts 100000 * :scale\n", "\\setrandom aid 1 :naccounts\n", "\\setrandom bid 1 :nbranches\n", "\\setrandom tid 1 :ntellers\n", "\\setrandom delta -5000 5000\n", "INSERT INTO pgbench_histor (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP); (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP);"], "scriptName": "/home/susan/PythonClass/django-postgres-stack/client/tmp/files/insert.sql"}
                         },
                         {
                             "scale": -1,
@@ -147,8 +147,8 @@
                             "read-only": true,
                             "start": 1582303162.866087,
                             "end": 1582303162.9297183,
-                            "run": 2
-                            "customScript": {"content": ["\\set nbranches :scale\n", "\\set ntellers 10 * :scale\n", "\\set naccounts 100000 * :scale\n", "\\setrandom aid 1 :naccounts\n", "\\setrandom bid 1 :nbranches\n", "\\setrandom tid 1 :ntellers\n", "\\setrandom delta -5000 5000\n", "INSERT INTO pgbench_histor (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP); (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP);"], "scriptName": "/home/susan/PythonClass/django-postgres-stack/client/tmp/files/insert.sql"}
+                            "run": 2,
+                            "customScripts": {"content": ["\\set nbranches :scale\n", "\\set ntellers 10 * :scale\n", "\\set naccounts 100000 * :scale\n", "\\setrandom aid 1 :naccounts\n", "\\setrandom bid 1 :nbranches\n", "\\setrandom tid 1 :ntellers\n", "\\setrandom delta -5000 5000\n", "INSERT INTO pgbench_histor (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP); (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP);"], "scriptName": "/home/susan/PythonClass/django-postgres-stack/client/tmp/files/insert.sql"}
                         }
                     ],
                     "metric": -1.0,
@@ -172,8 +172,8 @@
                             "read-only": false,
                             "start": 1582303162.9645376,
                             "end": 1582303163.0031207,
-                            "run": 0
-                            "customScript": {"content": ["\\set nbranches :scale\n", "\\set ntellers 10 * :scale\n", "\\set naccounts 100000 * :scale\n", "\\setrandom aid 1 :naccounts\n", "\\setrandom bid 1 :nbranches\n", "\\setrandom tid 1 :ntellers\n", "\\setrandom delta -5000 5000\n", "INSERT INTO pgbench_histor (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP); (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP);"], "scriptName": "/home/susan/PythonClass/django-postgres-stack/client/tmp/files/insert.sql"}
+                            "run": 0,
+                            "customScripts": {"content": ["\\set nbranches :scale\n", "\\set ntellers 10 * :scale\n", "\\set naccounts 100000 * :scale\n", "\\setrandom aid 1 :naccounts\n", "\\setrandom bid 1 :nbranches\n", "\\setrandom tid 1 :ntellers\n", "\\setrandom delta -5000 5000\n", "INSERT INTO pgbench_histor (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP); (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP);"], "scriptName": "/home/susan/PythonClass/django-postgres-stack/client/tmp/files/insert.sql"}
                         },
                         {
                             "scale": -1,
@@ -186,8 +186,8 @@
                             "read-only": false,
                             "start": 1582303163.2358973,
                             "end": 1582303163.2668629,
-                            "run": 1
-                            "customScript": {"content": ["\\set nbranches :scale\n", "\\set ntellers 10 * :scale\n", "\\set naccounts 100000 * :scale\n", "\\setrandom aid 1 :naccounts\n", "\\setrandom bid 1 :nbranches\n", "\\setrandom tid 1 :ntellers\n", "\\setrandom delta -5000 5000\n", "INSERT INTO pgbench_histor (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP); (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP);"], "scriptName": "/home/susan/PythonClass/django-postgres-stack/client/tmp/files/insert.sql"}
+                            "run": 1,
+                            "customScripts": {"content": ["\\set nbranches :scale\n", "\\set ntellers 10 * :scale\n", "\\set naccounts 100000 * :scale\n", "\\setrandom aid 1 :naccounts\n", "\\setrandom bid 1 :nbranches\n", "\\setrandom tid 1 :ntellers\n", "\\setrandom delta -5000 5000\n", "INSERT INTO pgbench_histor (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP); (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP);"], "scriptName": "/home/susan/PythonClass/django-postgres-stack/client/tmp/files/insert.sql"}
                         },
                         {
                             "scale": -1,
@@ -200,8 +200,8 @@
                             "read-only": false,
                             "start": 1582303163.5282252,
                             "end": 1582303163.5871816,
-                            "run": 2
-                            "customScript": {"content": ["\\set nbranches :scale\n", "\\set ntellers 10 * :scale\n", "\\set naccounts 100000 * :scale\n", "\\setrandom aid 1 :naccounts\n", "\\setrandom bid 1 :nbranches\n", "\\setrandom tid 1 :ntellers\n", "\\setrandom delta -5000 5000\n", "INSERT INTO pgbench_histor (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP); (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP);"], "scriptName": "/home/susan/PythonClass/django-postgres-stack/client/tmp/files/insert.sql"}
+                            "run": 2,
+                            "customScripts": {"content": ["\\set nbranches :scale\n", "\\set ntellers 10 * :scale\n", "\\set naccounts 100000 * :scale\n", "\\setrandom aid 1 :naccounts\n", "\\setrandom bid 1 :nbranches\n", "\\setrandom tid 1 :ntellers\n", "\\setrandom delta -5000 5000\n", "INSERT INTO pgbench_histor (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP); (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP);"], "scriptName": "/home/susan/PythonClass/django-postgres-stack/client/tmp/files/insert.sql"}
                         }
                     ],
                     "metric": -1.0,
@@ -221,8 +221,8 @@
                             "read-only": false,
                             "start": 1582303163.0389168,
                             "end": 1582303163.113145,
-                            "run": 0
-                            "customScript": {"content": ["\\set nbranches :scale\n", "\\set ntellers 10 * :scale\n", "\\set naccounts 100000 * :scale\n", "\\setrandom aid 1 :naccounts\n", "\\setrandom bid 1 :nbranches\n", "\\setrandom tid 1 :ntellers\n", "\\setrandom delta -5000 5000\n", "INSERT INTO pgbench_histor (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP); (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP);"], "scriptName": "/home/susan/PythonClass/django-postgres-stack/client/tmp/files/insert.sql"}
+                            "run": 0,
+                            "customScripts": {"content": ["\\set nbranches :scale\n", "\\set ntellers 10 * :scale\n", "\\set naccounts 100000 * :scale\n", "\\setrandom aid 1 :naccounts\n", "\\setrandom bid 1 :nbranches\n", "\\setrandom tid 1 :ntellers\n", "\\setrandom delta -5000 5000\n", "INSERT INTO pgbench_histor (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP); (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP);"], "scriptName": "/home/susan/PythonClass/django-postgres-stack/client/tmp/files/insert.sql"}
                         },
                         {
                             "scale": -1,
@@ -235,8 +235,8 @@
                             "read-only": false,
                             "start": 1582303163.308287,
                             "end": 1582303163.374055,
-                            "run": 1
-                            "customScript": {"content": ["\\set nbranches :scale\n", "\\set ntellers 10 * :scale\n", "\\set naccounts 100000 * :scale\n", "\\setrandom aid 1 :naccounts\n", "\\setrandom bid 1 :nbranches\n", "\\setrandom tid 1 :ntellers\n", "\\setrandom delta -5000 5000\n", "INSERT INTO pgbench_histor (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP); (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP);"], "scriptName": "/home/susan/PythonClass/django-postgres-stack/client/tmp/files/insert.sql"}
+                            "run": 1,
+                            "customScripts": {"content": ["\\set nbranches :scale\n", "\\set ntellers 10 * :scale\n", "\\set naccounts 100000 * :scale\n", "\\setrandom aid 1 :naccounts\n", "\\setrandom bid 1 :nbranches\n", "\\setrandom tid 1 :ntellers\n", "\\setrandom delta -5000 5000\n", "INSERT INTO pgbench_histor (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP); (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP);"], "scriptName": "/home/susan/PythonClass/django-postgres-stack/client/tmp/files/insert.sql"}
                         },
                         {
                             "scale": -1,
@@ -249,8 +249,8 @@
                             "read-only": false,
                             "start": 1582303163.6630657,
                             "end": 1582303163.712023,
-                            "run": 2
-                            "customScript": {"content": ["\\set nbranches :scale\n", "\\set ntellers 10 * :scale\n", "\\set naccounts 100000 * :scale\n", "\\setrandom aid 1 :naccounts\n", "\\setrandom bid 1 :nbranches\n", "\\setrandom tid 1 :ntellers\n", "\\setrandom delta -5000 5000\n", "INSERT INTO pgbench_histor (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP); (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP);"], "scriptName": "/home/susan/PythonClass/django-postgres-stack/client/tmp/files/insert.sql"}
+                            "run": 2,
+                            "customScripts": {"content": ["\\set nbranches :scale\n", "\\set ntellers 10 * :scale\n", "\\set naccounts 100000 * :scale\n", "\\setrandom aid 1 :naccounts\n", "\\setrandom bid 1 :nbranches\n", "\\setrandom tid 1 :ntellers\n", "\\setrandom delta -5000 5000\n", "INSERT INTO pgbench_histor (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP); (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP);"], "scriptName": "/home/susan/PythonClass/django-postgres-stack/client/tmp/files/insert.sql"}
                         }
                     ],
                     "metric": -1.0,
@@ -270,8 +270,8 @@
                             "read-only": false,
                             "start": 1582303163.1692345,
                             "end": 1582303163.1994867,
-                            "run": 0
-                            "customScript": {"content": ["\\set nbranches :scale\n", "\\set ntellers 10 * :scale\n", "\\set naccounts 100000 * :scale\n", "\\setrandom aid 1 :naccounts\n", "\\setrandom bid 1 :nbranches\n", "\\setrandom tid 1 :ntellers\n", "\\setrandom delta -5000 5000\n", "INSERT INTO pgbench_histor (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP); (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP);"], "scriptName": "/home/susan/PythonClass/django-postgres-stack/client/tmp/files/insert.sql"}
+                            "run": 0,
+                            "customScripts": {"content": ["\\set nbranches :scale\n", "\\set ntellers 10 * :scale\n", "\\set naccounts 100000 * :scale\n", "\\setrandom aid 1 :naccounts\n", "\\setrandom bid 1 :nbranches\n", "\\setrandom tid 1 :ntellers\n", "\\setrandom delta -5000 5000\n", "INSERT INTO pgbench_histor (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP); (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP);"], "scriptName": "/home/susan/PythonClass/django-postgres-stack/client/tmp/files/insert.sql"}
                         },
                         {
                             "scale": -1,
@@ -284,8 +284,8 @@
                             "read-only": false,
                             "start": 1582303163.4526489,
                             "end": 1582303163.4840245,
-                            "run": 1
-                            "customScript": {"content": ["\\set nbranches :scale\n", "\\set ntellers 10 * :scale\n", "\\set naccounts 100000 * :scale\n", "\\setrandom aid 1 :naccounts\n", "\\setrandom bid 1 :nbranches\n", "\\setrandom tid 1 :ntellers\n", "\\setrandom delta -5000 5000\n", "INSERT INTO pgbench_histor (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP); (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP);"], "scriptName": "/home/susan/PythonClass/django-postgres-stack/client/tmp/files/insert.sql"}
+                            "run": 1,
+                            "customScripts": {"content": ["\\set nbranches :scale\n", "\\set ntellers 10 * :scale\n", "\\set naccounts 100000 * :scale\n", "\\setrandom aid 1 :naccounts\n", "\\setrandom bid 1 :nbranches\n", "\\setrandom tid 1 :ntellers\n", "\\setrandom delta -5000 5000\n", "INSERT INTO pgbench_histor (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP); (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP);"], "scriptName": "/home/susan/PythonClass/django-postgres-stack/client/tmp/files/insert.sql"}
                         },
                         {
                             "scale": -1,
@@ -298,8 +298,8 @@
                             "read-only": false,
                             "start": 1582303163.7762773,
                             "end": 1582303163.8338342,
-                            "run": 2
-                            "customScript": {"content": ["\\set nbranches :scale\n", "\\set ntellers 10 * :scale\n", "\\set naccounts 100000 * :scale\n", "\\setrandom aid 1 :naccounts\n", "\\setrandom bid 1 :nbranches\n", "\\setrandom tid 1 :ntellers\n", "\\setrandom delta -5000 5000\n", "INSERT INTO pgbench_histor (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP); (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP);"], "scriptName": "/home/susan/PythonClass/django-postgres-stack/client/tmp/files/insert.sql"}
+                            "run": 2,
+                            "customScripts": {"content": ["\\set nbranches :scale\n", "\\set ntellers 10 * :scale\n", "\\set naccounts 100000 * :scale\n", "\\setrandom aid 1 :naccounts\n", "\\setrandom bid 1 :nbranches\n", "\\setrandom tid 1 :ntellers\n", "\\setrandom delta -5000 5000\n", "INSERT INTO pgbench_histor (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP); (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP);"], "scriptName": "/home/susan/PythonClass/django-postgres-stack/client/tmp/files/insert.sql"}
                         }
                     ],
                     "metric": -1.0,
