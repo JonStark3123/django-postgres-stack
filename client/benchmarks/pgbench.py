@@ -76,6 +76,11 @@ class PgBench(object):
         log("initializing pgbench '%s' with scale %s" % (self._dbname, scale))
         r = run_cmd(['pgbench', '-i', '-s', str(scale), self._dbname],
                     env=self._env, cwd=self._outdir)
+        # pgbench -b simple-update -h 127.0.0.1 -p 5432 -U postgres TestDB
+        r = run_cmd(['pgbench', '-b', 'simple-update', '-h','127.0.0.1', '-p','5432','-U','postgres','TestDB'],
+                    env=self._env, cwd=self._outdir)
+
+
 
         # remember the init duration
         self._results['results']['init'] = r[2]
