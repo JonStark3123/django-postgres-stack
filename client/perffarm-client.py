@@ -4,6 +4,8 @@ import argparse
 import json
 import os
 
+
+
 from benchmarks.pgbench import PgBench
 from benchmarks.runner import BenchmarkRunner
 
@@ -56,11 +58,13 @@ if __name__ == '__main__':
         if system == 'Linux':
             collectors.register('linux', LinuxCollector(OUTPUT_DIR))
 
-        collectors.register('scripts',
-                            ScriptCollector(SCRIPTS_DIR))
+        # collectors.register('scripts',
+        #                     ScriptCollector(SCRIPTS_DIR))
 
         collectors.register('collectd',
                             CollectdCollector(OUTPUT_DIR, DATABASE_NAME, ''))
+
+
 
         pg_collector = PostgresCollector(OUTPUT_DIR, dbname=DATABASE_NAME,
                                          bin_path=('%s/bin' % (BUILD_PATH)))
@@ -83,6 +87,9 @@ if __name__ == '__main__':
                                bin_path=('%s/bin' % (BUILD_PATH,)),
                                postgres_config=POSTGRES_CONFIG,
                                **PGBENCH_CONFIG)
+
+
+        # collectors.register('', ScriptCollector(SCRIPTS_DIR))
 
         # check configuration and report all issues
         issues = runner.check()

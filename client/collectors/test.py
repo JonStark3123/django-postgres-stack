@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
+import glob
+import os
 import subprocess, psycopg2, sys
+import json
+
+from settings import SCRIPTS_DIR
 
 if __name__ == '__main__':
     DBNAME = 'TestDB'
@@ -20,22 +25,23 @@ if __name__ == '__main__':
     # initialize the test database with some stock pgbench options
     # subprocess.call(['pgbench', '-i', '-s', '10', DBNAME])
     # psycopg2.connect(database="testdb", user="postgres", password="cohondob", host="127.0.0.1", port="5432")
-    try:
-            conn = psycopg2.connect('dbname={} user={} password={} host=localhost'.format(DBNAME, DBUSER,DBPASSWORD))
-    except Exception as e:
-        print("[!] ", e)
+    scriptList= []
+    scriptContent = []
+    scriptDir = SCRIPTS_DIR
+    if os.path.exists(scriptDir):
+        sqlScript = glob.glob(scriptDir + "/*.sql")
+
+        for script in sqlScript:
+            scriptObj = {}
+            # fp = open(script, 'r')
+            # for line in fp.readlines():
+            #     scriptContent.append(line)
+            # fp.close()
+            # scriptObj["content"] = scriptContent
+            scriptObj["scriptName"] = os.path.basename(script)
+            scriptList.append(scriptObj)
+        json = json.dumps(scriptList)
+        print("collecting self-design script json: " + json)
+
     else:
-        with conn:
-            with conn.cursor() as curs:
-                curs.execute('''CREATE TABLE ''' + table_name +
-                      ''' (file_path TEXT PRIMARY KEY NOT NULL, 
-                      file_hash TEXT, 
-                      check_some TEXT,
-                      file_inode TEXT NOT NULL, 
-                      file_permission TEXT NOT NULL,
-                      file_uid TEXT NOT NULL,
-                      file_gid TEXT NOT NULL, 
-                      file_reference TEXT NOT NULL, 
-                      file_table TEXT NOT NULL);''')
-    finally:
-            conn.close()
+        print("collecting self-design script files Error: " + scriptDir + " not exists")

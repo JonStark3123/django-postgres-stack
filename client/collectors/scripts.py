@@ -1,9 +1,9 @@
 import glob
 import os.path
-
-from datetime import datetime, timedelta, time
+from settings import SCRIPTS_DIR, CUSTEMSCRIPT
 from utils.logging import log
 from utils.misc import run_cmd
+import json
 
 
 class ScriptCollector(object):
@@ -11,8 +11,6 @@ class ScriptCollector(object):
 
     def __init__(self, scriptdirpath):
         self._dirPath = scriptdirpath
-
-
 
     def start(self):
         pass
@@ -38,23 +36,63 @@ class ScriptCollector(object):
         return r[1]
 
     def _collect_scriptDir_info(self):
-        scriptObj = {}
+        scriptList = []
         scriptContent = []
-        scriptDir = self._dirPath
+        scriptDir = SCRIPTS_DIR
         if os.path.exists(scriptDir):
-            sqlScript = glob.iglob(scriptDir + "/*.sql")
+            sqlScript = glob.glob(scriptDir + "/*.sql")
 
             for script in sqlScript:
-                fp = open(script, 'r')
-                for line in fp.readlines():
-                    scriptContent.append(line)
-                fp.close()
-                scriptObj["content"] = scriptContent
-                scriptObj["scriptName"] = script
-            # json = json.dumps(scriptObj)
-            # print("collecting self-design script json: " + json)
+                scriptObj = {}
+                # fp = open(script, 'r')
+                # for line in fp.readlines():
+                #     scriptContent.append(line)
+                # fp.close()
+                # scriptObj["content"] = scriptContent
+                scriptObj["scriptName"] = os.path.basename(script)
+                scriptList.append(scriptObj)
+            json = json.dumps(scriptList)
+            print("collecting self-design script json: " + json)
 
         else:
             print("collecting self-design script files Error: " + scriptDir + " not exists")
 
         return scriptObj
+
+    def run_custem_script(self):
+        r = run_cmd(CUSTEMSCRIPT,
+                    env=self._env, cwd=self._outdir)
+
+        # pgbench -b simple-update -h 127.0.0.1 -p 5432 -U postgres TestDB
+        # r = run_cmd(['pgbench', '-b', 'simple-update', '-h','127.0.0.1', '-p','5432','-U','postgres',self._dbname],
+        #             env=self._env, cwd=self._outdir)
+        # r = run_cmd(['pgbench', '--username=postgres', '-i', self._dbname],
+        #             env=self._env, cwd=self._outdir)
+        # r= os.subprocess.call(["sudo", "-u", "postgres", "pgbench", "-i", self._dbname], stdout=os.subprocess.PIPE)
+
+        return r
+
+    @staticmethod
+    def getScriptListJson():
+        scriptList = []
+        # scriptContent = []
+        scriptDir = SCRIPTS_DIR
+        if os.path.exists(scriptDir):
+            sqlScript = glob.glob(scriptDir + "/*.sql")
+
+            for script in sqlScript:
+                scriptObj = {}
+                # fp = open(script, 'r')
+                # for line in fp.readlines():
+                #     scriptContent.append(line)
+                # fp.close()
+                # scriptObj["content"] = scriptContent
+                scriptObj["scriptName"] = os.path.basename(script)
+                scriptList.append(scriptObj)
+            result = json.dumps(scriptList)
+            print("collecting self-design script json: " + result)
+
+        else:
+            print("collecting self-design script files Error: " + scriptDir + " not exists")
+
+        return scriptList

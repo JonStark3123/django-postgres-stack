@@ -7,6 +7,9 @@ import time
 from numpy import mean, median, std
 
 from multiprocessing import cpu_count
+
+from collectors.scripts import ScriptCollector
+from settings import CUSTEMSCRIPT, SCRIPTS_DIR
 from utils.logging import log
 from utils.misc import available_ram, run_cmd
 
@@ -76,14 +79,10 @@ class PgBench(object):
         log("initializing pgbench '%s' with scale %s" % (self._dbname, scale))
         r = run_cmd(['pgbench', '-i', '-s', str(scale), self._dbname],
                     env=self._env, cwd=self._outdir)
-        # pgbench -b simple-update -h 127.0.0.1 -p 5432 -U postgres TestDB
-        # r = run_cmd(['pgbench', '-b', 'simple-update', '-h','127.0.0.1', '-p','5432','-U','postgres','TestDB'],
-        #             env=self._env, cwd=self._outdir)
-
-
-
         # remember the init duration
         self._results['results']['init'] = r[2]
+
+
 
     @staticmethod
     def _parse_results(data):
@@ -220,7 +219,7 @@ class PgBench(object):
         # derive configuration for the CPU count / RAM size
         configs = PgBench._configure(cpu_count(), available_ram())
 
-        results = {'ro': {}, 'rw': {}}
+        results = {'ro': {}, 'rw': {}, 'customeScript': {}}
         j = 0
         for config in configs:
             scale = config['scale']
@@ -264,5 +263,6 @@ class PgBench(object):
                         results[tag][scale][clients]['median'] = median(tps)
                         results[tag][scale][clients]['std'] = std(tps)
 
+        results['customeScript']['scriptList'] = ScriptCollector(SCRIPTS_DIR).getScriptListJson()
         self._results['pgbench'] = results
         return self._results
