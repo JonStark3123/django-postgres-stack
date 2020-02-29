@@ -290,9 +290,7 @@
             }
         },
         "customeScript": {
-            "10": {
-                "1": {
-                    "results": [
+                "results": [
                         {
                             "scale": "10",
                             "mode": "simple",
@@ -305,131 +303,11 @@
                             "start": 1582375850.9067295,
                             "end": 1582376450.9502685,
                             "run": 0
-                        },
-                        {
-                            "scale": "10",
-                            "mode": "simple",
-                            "clients": "1",
-                            "threads": "1",
-                            "duration": "600",
-                            "latency": -1,
-                            "tps": "394.775597",
-                            "read-only": false,
-                            "start": 1582377654.9579742,
-                            "end": 1582378255.0292468,
-                            "run": 1
-                        },
-                        {
-                            "scale": "10",
-                            "mode": "simple",
-                            "clients": "1",
-                            "threads": "1",
-                            "duration": "600",
-                            "latency": -1,
-                            "tps": "398.817986",
-                            "read-only": false,
-                            "start": 1582379459.5554335,
-                            "end": 1582380059.6049457,
-                            "run": 2
                         }
                     ],
                     "metric": 414.9819186666667,
                     "median": 398.817986,
-                    "std": 25.7705487900477
-                },
-                "2": {
-                    "results": [
-                        {
-                            "scale": "10",
-                            "mode": "simple",
-                            "clients": "2",
-                            "threads": "2",
-                            "duration": "600",
-                            "latency": -1,
-                            "tps": "747.741457",
-                            "read-only": false,
-                            "start": 1582376452.0941174,
-                            "end": 1582377052.1486893,
-                            "run": 0
-                        },
-                        {
-                            "scale": "10",
-                            "mode": "simple",
-                            "clients": "2",
-                            "threads": "2",
-                            "duration": "600",
-                            "latency": -1,
-                            "tps": "692.279347",
-                            "read-only": false,
-                            "start": 1582378256.7403667,
-                            "end": 1582378856.7842846,
-                            "run": 1
-                        },
-                        {
-                            "scale": "10",
-                            "mode": "simple",
-                            "clients": "2",
-                            "threads": "2",
-                            "duration": "600",
-                            "latency": -1,
-                            "tps": "604.898488",
-                            "read-only": false,
-                            "start": 1582380060.8706696,
-                            "end": 1582380660.9701726,
-                            "run": 2
-                        }
-                    ],
-                    "metric": 681.639764,
-                    "median": 692.279347,
-                    "std": 58.79869042189149
-                },
-                "4": {
-                    "results": [
-                        {
-                            "scale": "10",
-                            "mode": "simple",
-                            "clients": "4",
-                            "threads": "4",
-                            "duration": "600",
-                            "latency": -1,
-                            "tps": "695.325625",
-                            "read-only": false,
-                            "start": 1582377053.296693,
-                            "end": 1582377653.3690443,
-                            "run": 0
-                        },
-                        {
-                            "scale": "10",
-                            "mode": "simple",
-                            "clients": "4",
-                            "threads": "4",
-                            "duration": "600",
-                            "latency": -1,
-                            "tps": "739.601977",
-                            "read-only": false,
-                            "start": 1582378858.126202,
-                            "end": 1582379458.1982412,
-                            "run": 1
-                        },
-                        {
-                            "scale": "10",
-                            "mode": "simple",
-                            "clients": "4",
-                            "threads": "4",
-                            "duration": "600",
-                            "latency": -1,
-                            "tps": "759.604248",
-                            "read-only": false,
-                            "start": 1582380662.2214832,
-                            "end": 1582381262.2977996,
-                            "run": 2
-                        }
-                    ],
-                    "metric": 731.5106166666666,
-                    "median": 739.601977,
-                    "std": 26.85812015917364
-                }
-            },
+                    "std": 25.7705487900477,
             "scriptList": [
                 {
                     "scriptName": "insert.sql"
