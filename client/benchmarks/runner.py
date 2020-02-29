@@ -144,6 +144,7 @@ class BenchmarkRunner(object):
         PATH_URL = 'upload/'
         url = self._url + PATH_URL
         headers = {'Content-Type': 'application/json; charset=utf-8', 'Authorization': self._secret}
+
         r = requests.post(url.encode('utf-8'), data=json.dumps(post).encode('utf-8'), headers=headers)
 
     def run(self):

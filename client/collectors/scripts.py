@@ -9,8 +9,11 @@ import json
 class ScriptCollector(object):
     'Collect various Linux-specific statistics (cpuinfo, mounts)'
 
-    def __init__(self, scriptdirpath):
+    def __init__(self, scriptdirpath, env, dbname):
         self._dirPath = scriptdirpath
+        self._env = env
+        self._dbname=dbname
+
 
     def start(self):
         pass
@@ -60,8 +63,9 @@ class ScriptCollector(object):
         return scriptObj
 
     def run_custem_script(self):
-        r = run_cmd(CUSTEMSCRIPT,
-                    env=self._env, cwd=self._outdir)
+        r = run_cmd(['pgbench', '-f', '/home/susan/PythonClass/django-postgres-stack/client/tmp/files/insert.sql'
+                        ,'-f', '/home/susan/PythonClass/django-postgres-stack/client/tmp/files/test.sql', self._dbname],
+                    env=self._env)
 
         # pgbench -b simple-update -h 127.0.0.1 -p 5432 -U postgres TestDB
         # r = run_cmd(['pgbench', '-b', 'simple-update', '-h','127.0.0.1', '-p','5432','-U','postgres',self._dbname],
