@@ -2,11 +2,11 @@ import os
 import sys
 
 # global configuration/Users/chenzhang
-GIT_URL = 'https://gitee.com/purpleyu/postgres.git'
-REPOSITORY_PATH = '/home/susan/PythonClass/django-postgres-stack/client/tmp/git-postgres'
-BUILD_PATH = '/usr/lib/postgresql/11'
+GIT_URL = 'https://github.com/postgres/postgres.git'
+REPOSITORY_PATH = '/tmp/git-postgres'
+BUILD_PATH = '/Users/chenzhang/anaconda3'
 BIN_PATH = os.path.join(BUILD_PATH, 'bin')
-DATADIR_PATH = '/home/susan/PythonClass/django-postgres-stack/client/tmp/data-postgres'
+DATADIR_PATH = '/tmp/data-postgres'
 SCRIPTS_DIR='/home/susan/PythonClass/django-postgres-stack/client/tmp/files/'
 
 POSTGRES_CONFIG = {
