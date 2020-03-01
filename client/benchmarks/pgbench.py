@@ -170,9 +170,7 @@ class PgBench(object):
             rtag = "rw"
         rdir = "%s/pgbench-%s-%d-%d-%s" % (self._outdir, rtag, scale, nclients,
                                            str(run))
-        if not(os.path.exists(rdir)):
-         os.mkdir(rdir)
-
+        os.mkdir(rdir)
 
         args = ['pgbench', '-c', str(nclients), '-j', str(njobs), '-T',
                 str(duration)]
@@ -216,7 +214,7 @@ class PgBench(object):
         # derive configuration for the CPU count / RAM size
         configs = PgBench._configure(cpu_count(), available_ram())
 
-        results = {'ro': {}, 'rw': {}}
+        results = {'ro': {}, 'rw': {}}  #ro:read only  rw:read-write
         j = 0
         for config in configs:
             scale = config['scale']

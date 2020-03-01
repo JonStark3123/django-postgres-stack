@@ -3,11 +3,11 @@ DEBUG = True
 DATABASES = {
         'default': {
                 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-                'NAME': 'postgres', # data_base name
-                'USER': 'chenzhang',
+                'NAME': 'pgperffarm-db',
+                'USER': 'postgres',
                 'PASSWORD': 'password',
-                #'HOST': '/var/run/postgresql'
-                'HOST': '/tmp'
+                'HOST': '/var/run/postgresql'
+                #'HOST': '/raid'
                 }
         }
 
