@@ -20,9 +20,8 @@ class PgBench(object):
     # TODO allow running custom scripts, not just the default
     #      read-write/read-only tests
     # TODO allow running 'prepared' mode
-
     def __init__(self, bin_path, dbname, runs=3, duration=60, csv=False,
-                 results_dir=None):
+                 results_dir=None, benchmark_options=None):
         '''
         bin_path   - path to PostgreSQL binaries (dropdb, createdb, psql
                      commands)
@@ -43,6 +42,7 @@ class PgBench(object):
         self._env['PATH'] = ':'.join([bin_path, self._env['PATH']])
 
         self._results = {}
+        self._benchmark_options = benchmark_options
 
     @staticmethod
     def _configure(cpu_count, ram_mbs):
@@ -210,14 +210,20 @@ class PgBench(object):
 
         return r
 
-    def run_tests(self, csv_queue):
+    def run_tests(self, csv_queue, benchmark_options=None):
         """
         execute the whole benchmark, including initialization, warmup and
         benchmark runs
         """
 
         # derive configuration for the CPU count / RAM size
-        configs = PgBench._configure(cpu_count(), available_ram())
+        # if there is benchmark setting in settings.py, take it and use,
+        # otherwise use the default one
+        configs = []
+        if benchmark_options:
+            configs.append(benchmark_options)
+        else:
+            configs = PgBench._configure(cpu_count(), available_ram())
 
         results = {'ro': {}, 'rw': {}, 'customeScript': {}}
         j = 0

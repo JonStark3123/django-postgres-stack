@@ -4,8 +4,6 @@ import argparse
 import json
 import os
 
-
-
 from benchmarks.pgbench import PgBench
 from benchmarks.runner import BenchmarkRunner
 
@@ -21,10 +19,7 @@ from utils import logging
 
 from settings_local import *
 from settings import *
-
-from client.settings import REPOSITORY_PATH
-
-API_URL = 'http://127.0.0.1:8000/'
+API_URL = 'http://127.0.0.1:8000/upload/'
 MACHINE_SECRET = '610f79063e62e6ad09460ac2c4e66da0386dc89b'
 if __name__ == '__main__':
 
@@ -57,13 +52,8 @@ if __name__ == '__main__':
         if system == 'Linux':
             collectors.register('linux', LinuxCollector(OUTPUT_DIR))
 
-        # collectors.register('scripts',
-        #                     ScriptCollector(SCRIPTS_DIR))
-
         collectors.register('collectd',
                             CollectdCollector(OUTPUT_DIR, DATABASE_NAME, ''))
-
-
 
         pg_collector = PostgresCollector(OUTPUT_DIR, dbname=DATABASE_NAME,
                                          bin_path=('%s/bin' % (BUILD_PATH)))
@@ -78,6 +68,10 @@ if __name__ == '__main__':
         # register one config for each benchmark (should be moved to a config
         # file)
         PGBENCH_CONFIG['results_dir'] = OUTPUT_DIR
+        # register user options as config
+        if PGBENCH_BENCHMARKING_OPTIONS:
+            PGBENCH_CONFIG['benchmark_options'] = PGBENCH_BENCHMARKING_OPTIONS
+
         runner.register_config('pgbench-basic',
                                'pgbench',
                                repository.current_branch(),
@@ -86,9 +80,6 @@ if __name__ == '__main__':
                                bin_path=('%s/bin' % (BUILD_PATH,)),
                                postgres_config=POSTGRES_CONFIG,
                                **PGBENCH_CONFIG)
-
-
-        # collectors.register('', ScriptCollector(SCRIPTS_DIR))
 
         # check configuration and report all issues
         issues = runner.check()
