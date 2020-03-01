@@ -13,9 +13,13 @@ class ScriptCollector(object):
         self._dirPath = scriptdirpath
         self._env = env
         self._dbname=dbname
+        self._scriptFileList = []
+        self.hasScript()
+
 
 
     def start(self):
+
         pass
 
     def stop(self):
@@ -38,65 +42,58 @@ class ScriptCollector(object):
 
         return r[1]
 
+    def hasScript(self):
+        isHasScript =False
+        if os.path.exists(self._dirPath):
+            self._scriptFileList = glob.glob(self._dirPath + "/*.sql")
+            if(len(self._scriptFileList) > 0):
+                isHasScript = True
+        return  isHasScript
+
+
     def _collect_scriptDir_info(self):
-        scriptList = []
-        scriptContent = []
-        scriptDir = SCRIPTS_DIR
-        if os.path.exists(scriptDir):
-            sqlScript = glob.glob(scriptDir + "/*.sql")
+        # scriptList = []
+        # scriptContent = []
 
-            for script in sqlScript:
-                scriptObj = {}
-                # fp = open(script, 'r')
-                # for line in fp.readlines():
-                #     scriptContent.append(line)
-                # fp.close()
-                # scriptObj["content"] = scriptContent
-                scriptObj["scriptName"] = os.path.basename(script)
-                scriptList.append(scriptObj)
-            json = json.dumps(scriptList)
-            print("collecting self-design script json: " + json)
-
-        else:
-            print("collecting self-design script files Error: " + scriptDir + " not exists")
+        for script in self.sqlScript:
+            scriptObj = {}
+            # fp = open(script, 'r')
+            # for line in fp.readlines():
+            #     scriptContent.append(line)
+            # fp.close()
+            # scriptObj["content"] = scriptContent
+            scriptObj["scriptName"] = os.path.basename(script)
+        #     scriptList.append(scriptObj)
+        # json = json.dumps(scriptList)
+        # print("collecting self-design script json: " + json)
 
         return scriptObj
 
     def run_custem_script(self):
-        r = run_cmd(['pgbench', '-f', '/home/susan/PythonClass/django-postgres-stack/client/tmp/files/insert.sql'
-                        ,'-f', '/home/susan/PythonClass/django-postgres-stack/client/tmp/files/test.sql', self._dbname],
+        args = ['pgbench']
+        for script in self._scriptFileList:
+            print(script)
+            args.append('-f')
+            path = os.path.abspath(script)
+            args.append(path)
+        args.append(self._dbname)
+
+        r = run_cmd(args,
                     env=self._env)
 
-        # pgbench -b simple-update -h 127.0.0.1 -p 5432 -U postgres TestDB
-        # r = run_cmd(['pgbench', '-b', 'simple-update', '-h','127.0.0.1', '-p','5432','-U','postgres',self._dbname],
-        #             env=self._env, cwd=self._outdir)
-        # r = run_cmd(['pgbench', '--username=postgres', '-i', self._dbname],
-        #             env=self._env, cwd=self._outdir)
-        # r= os.subprocess.call(["sudo", "-u", "postgres", "pgbench", "-i", self._dbname], stdout=os.subprocess.PIPE)
+
 
         return r
 
-    @staticmethod
-    def getScriptListJson():
+    def getScriptListJson(self):
         scriptList = []
         # scriptContent = []
-        scriptDir = SCRIPTS_DIR
-        if os.path.exists(scriptDir):
-            sqlScript = glob.glob(scriptDir + "/*.sql")
+        for script in self._scriptFileList:
+            scriptObj = {}
+            scriptObj["scriptName"] = os.path.basename(script)
+            scriptList.append(scriptObj)
+        result = json.dumps(scriptList)
+        print("collecting self-design script json: " + result)
 
-            for script in sqlScript:
-                scriptObj = {}
-                # fp = open(script, 'r')
-                # for line in fp.readlines():
-                #     scriptContent.append(line)
-                # fp.close()
-                # scriptObj["content"] = scriptContent
-                scriptObj["scriptName"] = os.path.basename(script)
-                scriptList.append(scriptObj)
-            result = json.dumps(scriptList)
-            print("collecting self-design script json: " + result)
-
-        else:
-            print("collecting self-design script files Error: " + scriptDir + " not exists")
 
         return scriptList

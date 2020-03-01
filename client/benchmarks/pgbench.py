@@ -270,26 +270,28 @@ class PgBench(object):
         #         str(duration)]
 
         script = ScriptCollector(scriptdirpath=SCRIPTS_DIR,env=self._env, dbname=self._dbname)
-        start = time.time()
-        scriptResult =script.run_custem_script()
+        if script.hasScript():
+            start = time.time()
+            scriptResult =script.run_custem_script()
 
-        print('scriptResult   ')
-        print(scriptResult)
-        end = time.time()
-        r = PgBench._parse_results(scriptResult[1])
-        # r.update({'customeScript': read_only})
-        # results[tag][scale][clients]['results'].append(r)
-        r.update({'start': start, 'end': end})
+            print('scriptResult   ')
+            print(scriptResult)
+            end = time.time()
+            r = PgBench._parse_results(scriptResult[1])
+            # r.update({'customeScript': read_only})
+            # results[tag][scale][clients]['results'].append(r)
+            r.update({'start': start, 'end': end})
 
-        results['customeScript']['results']=[]
-        results['customeScript']['results'].append(r)
-        tps = []
-        for result in results['customeScript']['results']:
-            tps.append(float(result['tps']))
-        results['customeScript']['metric'] = mean(tps)
-        results['customeScript']['median'] = median(tps)
-        results['customeScript']['std'] = std(tps)
+            results['customeScript']['results']=[]
+            results['customeScript']['results'].append(r)
+            tps = []
+            for result in results['customeScript']['results']:
+                tps.append(float(result['tps']))
+            results['customeScript']['metric'] = mean(tps)
+            results['customeScript']['median'] = median(tps)
+            results['customeScript']['std'] = std(tps)
 
-        results['customeScript']['scriptList'] = script.getScriptListJson()
+            results['customeScript']['scriptList'] = script.getScriptListJson()
+
         self._results['pgbench'] = results
         return self._results

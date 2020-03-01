@@ -13,7 +13,7 @@ if __name__ == '__main__':
     path = pathlib.Path('tmp/files/test2.sql')
     print(path)
 
-    DBNAME = 'TestDB'
+    # DBNAME = 'TestDB'
     # DBUSER = 'postgres'
     # DBPASSWORD='password'
     # DBHOST='127.0.0.1'

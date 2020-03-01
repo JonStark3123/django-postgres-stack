@@ -13,7 +13,6 @@ from collectors.collectd import CollectdCollector
 from collectors.linux import LinuxCollector
 from collectors.postgres import PostgresCollector
 from collectors.collector import MultiCollector
-from collectors.scripts import ScriptCollector
 
 from utils.locking import FileLock
 from utils.git import GitRepository
