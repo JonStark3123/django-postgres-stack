@@ -7,9 +7,6 @@ import time
 from numpy import mean, median, std
 
 from multiprocessing import cpu_count
-
-from collectors.scripts import ScriptCollector
-from settings import SCRIPTS_DIR
 from utils.logging import log
 from utils.misc import available_ram, run_cmd
 
@@ -20,8 +17,9 @@ class PgBench(object):
     # TODO allow running custom scripts, not just the default
     #      read-write/read-only tests
     # TODO allow running 'prepared' mode
+
     def __init__(self, bin_path, dbname, runs=3, duration=60, csv=False,
-                 results_dir=None, benchmark_options=None):
+                 results_dir=None):
         '''
         bin_path   - path to PostgreSQL binaries (dropdb, createdb, psql
                      commands)
@@ -42,7 +40,6 @@ class PgBench(object):
         self._env['PATH'] = ':'.join([bin_path, self._env['PATH']])
 
         self._results = {}
-        self._benchmark_options = benchmark_options
 
     @staticmethod
     def _configure(cpu_count, ram_mbs):
@@ -79,10 +76,9 @@ class PgBench(object):
         log("initializing pgbench '%s' with scale %s" % (self._dbname, scale))
         r = run_cmd(['pgbench', '-i', '-s', str(scale), self._dbname],
                     env=self._env, cwd=self._outdir)
+
         # remember the init duration
         self._results['results']['init'] = r[2]
-
-
 
     @staticmethod
     def _parse_results(data):
@@ -174,8 +170,7 @@ class PgBench(object):
             rtag = "rw"
         rdir = "%s/pgbench-%s-%d-%d-%s" % (self._outdir, rtag, scale, nclients,
                                            str(run))
-        if not(os.path.exists(rdir)):
-         os.mkdir(rdir)
+        os.mkdir(rdir)
 
         args = ['pgbench', '-c', str(nclients), '-j', str(njobs), '-T',
                 str(duration)]
@@ -210,22 +205,16 @@ class PgBench(object):
 
         return r
 
-    def run_tests(self, csv_queue, benchmark_options=None):
+    def run_tests(self, csv_queue):
         """
         execute the whole benchmark, including initialization, warmup and
         benchmark runs
         """
 
         # derive configuration for the CPU count / RAM size
-        # if there is benchmark setting in settings.py, take it and use,
-        # otherwise use the default one
-        configs = []
-        if benchmark_options:
-            configs.append(benchmark_options)
-        else:
-            configs = PgBench._configure(cpu_count(), available_ram())
+        configs = PgBench._configure(cpu_count(), available_ram())
 
-        results = {'ro': {}, 'rw': {}, 'customeScript': {}}
+        results = {'ro': {}, 'rw': {}}  #ro:read only  rw:read-write
         j = 0
         for config in configs:
             scale = config['scale']
@@ -234,9 +223,6 @@ class PgBench(object):
                 results['ro'][scale] = {}
             if scale not in results['rw']:
                 results['rw'][scale] = {}
-            # if scale not in results['customeScript']:
-                # results['customeScript'][scale] = {}
-
 
             # init for the dataset scale and warmup
             self._init(scale)
@@ -271,33 +257,6 @@ class PgBench(object):
                         results[tag][scale][clients]['metric'] = mean(tps)
                         results[tag][scale][clients]['median'] = median(tps)
                         results[tag][scale][clients]['std'] = std(tps)
-        # todo add cmmand
-        # args = ['pgbench', '-c', str(nclients), '-j', str(njobs), '-T',
-        #         str(duration)]
-
-        script = ScriptCollector(scriptdirpath=SCRIPTS_DIR,env=self._env, dbname=self._dbname)
-        if script.hasScript():
-            start = time.time()
-            scriptResult =script.run_custem_script()
-
-            print('scriptResult   ')
-            print(scriptResult)
-            end = time.time()
-            r = PgBench._parse_results(scriptResult[1])
-            # r.update({'customeScript': read_only})
-            # results[tag][scale][clients]['results'].append(r)
-            r.update({'start': start, 'end': end})
-
-            results['customeScript']['results']=[]
-            results['customeScript']['results'].append(r)
-            tps = []
-            for result in results['customeScript']['results']:
-                tps.append(float(result['tps']))
-            results['customeScript']['metric'] = mean(tps)
-            results['customeScript']['median'] = median(tps)
-            results['customeScript']['std'] = std(tps)
-
-            results['customeScript']['scriptList'] = script.getScriptListJson()
 
         self._results['pgbench'] = results
         return self._results

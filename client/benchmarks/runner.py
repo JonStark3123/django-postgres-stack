@@ -79,12 +79,12 @@ class BenchmarkRunner(object):
         # construct the benchmark class for the given config name
         config = self._configs[config_name]
         bench = self._benchmarks[config['benchmark']]
-        benchmark_options = config['config']['benchmark_options']
 
         # expand the attribute names
         bench = bench(**config['config'])
 
-        self._cluster.start(config=config['postgres'])
+        self._cluster.start(
+            config=config['postgres'])  # obtain the database name pgperffarm-db
 
         # start collector(s) of additional info
         self._collector.start()
@@ -92,10 +92,6 @@ class BenchmarkRunner(object):
         # if requested output to CSV, create a queue and collector process
         csv_queue = None
         csv_collector = None
-        # somehow get the benchmarking options in settings.py
-        if benchmark_options:
-            options = benchmark_options
-
         if 'csv' in config['config'] and config['config']['csv']:
             csv_queue = Queue()
             csv_collector = Process(target=csv_collect_results,
@@ -103,7 +99,7 @@ class BenchmarkRunner(object):
             csv_collector.start()
 
         # run the tests
-        r = bench.run_tests(csv_queue, options)
+        r = bench.run_tests(csv_queue)
 
         # notify the result collector to end and wait for it to terminate
         if csv_queue:
@@ -143,14 +139,15 @@ class BenchmarkRunner(object):
 
     def _upload_results(self, results):
 
-        postdata = results
-        post = []
-        post.append(postdata)
         PATH_URL = 'upload/'
-        url = self._url + PATH_URL
-        headers = {'Content-Type': 'application/json; charset=utf-8', 'Authorization': self._secret}
-        files = {'test.sql': open('tmp/files/test.sql', 'rb')}
-        r = requests.post(url.encode('utf-8'), data=json.dumps(post).encode('utf-8'), headers=headers, files=files)
+        url = self.url + PATH_URL
+        headers = {'Authorization': self._secret}
+        files = {
+            'json': (None, json.dumps(results), 'application/json'),
+            'insert.sql': open('../tmp/files/insert.sql', 'rb'),
+            'test.sql': open('../tmp/files/test.sql', 'rb')
+        }
+        r = requests.post(url.encode('utf-8'), files=files, headers=headers)
 
     def run(self):
         'run all the configured benchmarks'

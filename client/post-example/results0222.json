@@ -288,31 +288,6 @@
                     "std": 26.85812015917364
                 }
             }
-        },
-        "customeScript": {
-                "results": [
-                        {
-                            "scale": "10",
-                            "mode": "simple",
-                            "clients": "1",
-                            "threads": "1",
-                            "duration": "600",
-                            "latency": -1,
-                            "tps": "451.352173",
-                            "read-only": false,
-                            "start": 1582375850.9067295,
-                            "end": 1582376450.9502685,
-                            "run": 0
-                        }
-                    ],
-                    "metric": 414.9819186666667,
-                    "median": 398.817986,
-                    "std": 25.7705487900477,
-            "scriptList": [
-                {
-                    "scriptName": "insert.sql"
-                }
-            ]
         }
     },
     "linux": {

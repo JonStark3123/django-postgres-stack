@@ -111,15 +111,13 @@ def TestRecordCreate(request, format=None):
     elif request.method == 'POST':
 
             """
-            Receive data from client
+            Receive data and files from client
             """
+
             data = request.data
-
             json_data = data['json']
-            # json_data = json.dumps(json_data, ensure_ascii=False)
             json_data = json.loads(json_data)
-            file_data = data['file']
-
+            files = request.FILES
 
             from django.db import transaction
             try:
@@ -373,7 +371,7 @@ def TestRecordCreate(request, format=None):
                                 for test_script in test_script_list:
                                     test_script_data = test_script
                                     test_script_data['test_result'] = testResultRet.id
-                                    test_script_data['script'] = file_data
+                                    test_script_data['script'] = files[test_script_data['scriptName']]
                                     testScript = CreateTestScriptSerializer(data=test_script_data)
 
                                     testScriptRet = None

@@ -1,13 +1,12 @@
 import os
 import sys
 
-# global configuration/Users/chenzhang
-GIT_URL = 'https://github.com/postgres/postgres.git'
-REPOSITORY_PATH = '/tmp/git-postgres'
-BUILD_PATH = '/Users/chenzhang/anaconda3'
+# global configuration
+GIT_URL = 'https://gitee.com/purpleyu/postgres.git' #changed to a local repo
+REPOSITORY_PATH = '/raid/git-postgres/postgres'
+BUILD_PATH = '/usr/lib/postgresql/11'
 BIN_PATH = os.path.join(BUILD_PATH, 'bin')
-DATADIR_PATH = '/tmp/data-postgres'
-SCRIPTS_DIR='/home/susan/PythonClass/django-postgres-stack/client/tmp/files/'
+DATADIR_PATH = '/raid/data-postgres/postgres'
 
 POSTGRES_CONFIG = {
     'shared_buffers': '1GB',
@@ -23,10 +22,9 @@ POSTGRES_CONFIG = {
     'checkpoint_completion_target': '0.9',
 }
 
-DATABASE_NAME = 'postgres' # This name needs to be the same as rest_api settings_local.py database NAME
+DATABASE_NAME = 'pgperffarm-db' # This name needs to be the same as rest_api settings_local.py database NAME
 
-OUTPUT_DIR = '/tmp/perf-output'
-
+OUTPUT_DIR = '/raid/perf-output'
 
 # configuration for PgBench
 # runs - number of repetitions (including test for all client counts)
@@ -35,15 +33,6 @@ PGBENCH_CONFIG = {
     'runs': 3,
     'duration': 600,
     'csv': False
-}
-
-# Benchmarking options for PgBench
-# clients - number of concurrent database sessions
-# threads - number of worker threads within PgBench
-PGBENCH_BENCHMARKING_OPTIONS = {
-    'scale': 10,
-    'clients': [2, 4, 8],
-    'threads': 1
 }
 
 # ignore missing file with local config

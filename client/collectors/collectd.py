@@ -3,8 +3,8 @@ import os
 from utils.logging import log
 from utils.misc import run_cmd
 
-COLLECTD_CONFIG = '/tmp/.collectd.conf'
-COLLECTD_PIDFILE = '/tmp/.collectd.pid'
+COLLECTD_CONFIG = '/raid/.collectd.conf'
+COLLECTD_PIDFILE = '/raid/.collectd.pid'
 
 
 class CollectdCollector(object):
