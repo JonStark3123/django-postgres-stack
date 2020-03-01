@@ -78,10 +78,6 @@ if __name__ == '__main__':
         # register one config for each benchmark (should be moved to a config
         # file)
         PGBENCH_CONFIG['results_dir'] = OUTPUT_DIR
-        # register user options as config
-        if PGBENCH_BENCHMARKING_OPTIONS:
-            PGBENCH_CONFIG['benchmark_options'] = PGBENCH_BENCHMARKING_OPTIONS
-
         runner.register_config('pgbench-basic',
                                'pgbench',
                                repository.current_branch(),
