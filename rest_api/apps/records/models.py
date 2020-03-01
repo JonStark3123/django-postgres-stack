@@ -10,10 +10,11 @@ class TestBranch(models.Model):
     """
     test branch
     """
-    branch_name = models.CharField(max_length=128, unique=True,verbose_name="branch name", help_text="branch name")
-    branch_order = models.IntegerField(default=5,verbose_name="branch order", help_text="order in all the  branch")
-    is_show = models.BooleanField(verbose_name="branch is shown", default=True, help_text="branch isshow")
-    is_accept = models.BooleanField(verbose_name="branch accepts new reports", default=True, help_text="branch accepts new reports")
+    branch_name = models.CharField(max_length=128, unique=True, verbose_name="branch name", help_text="branch name")
+    branch_order = models.IntegerField(default=5, verbose_name="branch order", help_text="order in all the  branch")
+    is_show = models.BooleanField(verbose_name="branch is shown", default=True, help_text="branch is show")
+    is_accept = models.BooleanField(verbose_name="branch accepts new reports", default=True,
+                                    help_text="branch accepts new reports")
     add_time = models.DateTimeField(default=timezone.now, verbose_name="branch added time",
                                     help_text="branch added time")
 
@@ -43,23 +44,27 @@ class TestCategory(models.Model):
 
 
 class PGInfo(models.Model):
-
-    checkpoint_timeout = models.CharField(max_length=32, verbose_name="checkpoint_timeout", help_text="checkpoint_timeout")
+    checkpoint_timeout = models.CharField(max_length=32, verbose_name="checkpoint_timeout",
+                                          help_text="checkpoint_timeout")
     log_temp_files = models.IntegerField(verbose_name="log_temp_files", help_text="log_temp_files")
     work_mem = models.CharField(max_length=32, verbose_name="work_mem", help_text="work_mem")
-    log_line_prefix = models.CharField(max_length=64,verbose_name="checkpoint_timeout", help_text="checkpoint_timeout")
+    log_line_prefix = models.CharField(max_length=64, verbose_name="checkpoint_timeout", help_text="checkpoint_timeout")
     shared_buffers = models.CharField(max_length=32, verbose_name="shared_buffers", help_text="shared_buffers")
-    log_autovacuum_min_duration =models.IntegerField(verbose_name="log_autovacuum_min_duration", help_text="log_autovacuum_min_duration")
+    log_autovacuum_min_duration = models.IntegerField(verbose_name="log_autovacuum_min_duration",
+                                                      help_text="log_autovacuum_min_duration")
 
-
-    checkpoint_completion_target = models.DecimalField(max_digits=8, decimal_places=4,verbose_name="checkpoint_completion_target", help_text="checkpoint_completion_target")
-    maintenance_work_mem = models.CharField(max_length=32, verbose_name="maintenance_work_mem", help_text="maintenance_work_mem")
+    checkpoint_completion_target = models.DecimalField(max_digits=8, decimal_places=4,
+                                                       verbose_name="checkpoint_completion_target",
+                                                       help_text="checkpoint_completion_target")
+    maintenance_work_mem = models.CharField(max_length=32, verbose_name="maintenance_work_mem",
+                                            help_text="maintenance_work_mem")
 
     SWITCH_CHOICE = (
         (1, 'on'),
         (2, 'off')
     )
-    log_checkpoints = models.IntegerField(choices=SWITCH_CHOICE,verbose_name="log_checkpoints", help_text="log_checkpoints")
+    log_checkpoints = models.IntegerField(choices=SWITCH_CHOICE, verbose_name="log_checkpoints",
+                                          help_text="log_checkpoints")
     max_wal_size = models.CharField(max_length=32, verbose_name="max_wal_size", help_text="max_wal_size")
     min_wal_size = models.CharField(max_length=32, verbose_name="min_wal_size", help_text="min_wal_size")
 
@@ -117,7 +122,7 @@ class TestRecord(models.Model):
     hash = models.CharField(unique=True, default='', max_length=128, verbose_name="record hash",
                             help_text="record hash")
     uuid = models.CharField(unique=True, default='', max_length=64, verbose_name="record uuid", help_text="record uuid")
-    commit = models.CharField(max_length=64, verbose_name="record commit", help_text="record commit")
+    commit = models.CharField(max_length=100, verbose_name="record commit", help_text="record commit")
 
     add_time = models.DateTimeField(default=timezone.now, verbose_name="test added time")
 
@@ -169,7 +174,7 @@ def calc_status(sender, instance, **kwargs):
     machine_id = instance.test_record.test_machine_id
     add_time = instance.test_record.add_time
     branch = instance.test_record.branch
-    prevRecord = TestRecord.objects.order_by('-add_time').filter(test_machine_id=machine_id,branch=branch,
+    prevRecord = TestRecord.objects.order_by('-add_time').filter(test_machine_id=machine_id, branch=branch,
                                                                  add_time__lt=add_time).first()
     if (prevRecord == None):
         print("prev record not found")
@@ -184,9 +189,9 @@ def calc_status(sender, instance, **kwargs):
     percentage = (instance.metric - prevTestDataSet.metric) / prevTestDataSet.metric
 
     status = 0
-    if (percentage >= 0.05):
+    if percentage >= 0.05:
         status = 1
-    elif (percentage <= -0.05):
+    elif percentage <= -0.05:
         status = 3
     else:
         status = 2
@@ -199,15 +204,14 @@ def calc_status(sender, instance, **kwargs):
 
 
 class TestResult(models.Model):
-
     test_dataset = models.ForeignKey(TestDataSet, verbose_name="test dataset id", help_text="test dataset id")
     latency = models.IntegerField(verbose_name="latency", help_text="latency of the test result")
     scale = models.IntegerField(verbose_name="scale", help_text="scale of the test result")
     end = models.DecimalField(max_digits=32, decimal_places=12, verbose_name="end",
-                              help_text="endtime of the test result")
+                              help_text="end time of the test result")
     clients = models.IntegerField(verbose_name="clients", help_text="clients of the test result")
     start = models.DecimalField(max_digits=32, decimal_places=12, verbose_name="start",
-                                help_text="starttime of the test result")
+                                help_text="start time of the test result")
     tps = models.DecimalField(default=0, max_digits=18, decimal_places=6, verbose_name="tps",
                               help_text="tps of the test result")
     run = models.IntegerField(verbose_name="run", help_text="run number")
@@ -224,3 +228,17 @@ class TestResult(models.Model):
     class Meta:
         verbose_name = "test result"
         verbose_name_plural = "test result"
+
+
+class TestScript(models.Model):
+    test_result = models.ForeignKey(TestResult, verbose_name="test result id", help_text="test result id")
+    # customScripts = models.CharField(max_length=10000, verbose_name="custom scripts",
+    #                                help_text="custom scripts", default="TPC-B")
+    scriptName = models.CharField(max_length=100, verbose_name="custom scripts name",
+                                       help_text="custom scripts name", default="TPC-B")
+    script = models.FileField(verbose_name="custom scripts file", upload_to="scripts/")
+    add_time = models.DateTimeField(default=timezone.now, verbose_name="custom scripts list added time")
+
+    class Meta:
+        verbose_name = "custom script list"
+        verbose_name_plural = "custom script list"

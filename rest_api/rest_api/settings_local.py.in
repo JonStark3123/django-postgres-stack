@@ -4,10 +4,10 @@ DATABASES = {
         'default': {
                 'ENGINE': 'django.db.backends.postgresql_psycopg2',
                 'NAME': 'pgperffarm',
-                'USER': 'postgres',
+                'USER': 'chenzhang',
                 'PASSWORD': 'password',
                 #'HOST': '/var/run/postgresql'
-                'HOST': '/tmp'
+                'HOST': '/raid'
                 }
         }
 
