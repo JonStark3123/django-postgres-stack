@@ -144,7 +144,8 @@ class BenchmarkRunner(object):
         headers = {'Authorization': self._secret}
         files = {
             'json': (None, json.dumps(results), 'application/json'),
-            'file': (os.path.basename('insert.sql'), open('../tmp/files/insert.sql', 'rb'), 'application/octet-stream')
+            'insert.sql': open('../tmp/files/insert.sql', 'rb'),
+            'test.sql': open('../tmp/files/test.sql', 'rb')
         }
         r = requests.post(url.encode('utf-8'), files=files, headers=headers)
 
