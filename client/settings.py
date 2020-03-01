@@ -27,7 +27,6 @@ DATABASE_NAME = 'postgres' # This name needs to be the same as rest_api settings
 
 OUTPUT_DIR = '/tmp/perf-output'
 
-CUSTEMSCRIPT='pgbench  -f  tmp/files/test.sql -U postgres TestDB'
 
 # configuration for PgBench
 # runs - number of repetitions (including test for all client counts)

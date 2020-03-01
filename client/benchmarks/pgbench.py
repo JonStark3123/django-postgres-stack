@@ -9,7 +9,7 @@ from numpy import mean, median, std
 from multiprocessing import cpu_count
 
 from collectors.scripts import ScriptCollector
-from settings import CUSTEMSCRIPT, SCRIPTS_DIR
+from settings import SCRIPTS_DIR
 from utils.logging import log
 from utils.misc import available_ram, run_cmd
 
