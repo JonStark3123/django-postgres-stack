@@ -19,8 +19,8 @@ from utils import logging
 
 from settings_local import *
 from settings import *
-# API_URL = 'http://127.0.0.1:8000/'
-API_URL = 'http://127.0.0.1:8000/upload/'
+API_URL = 'http://127.0.0.1:8000/'
+# API_URL = 'http://127.0.0.1:8000/upload/'
 MACHINE_SECRET = 'e984c3017cd1a0dff0ef9f0c394a5c285e421411' #This machine secrete is specific to my environment
 if __name__ == '__main__':
 

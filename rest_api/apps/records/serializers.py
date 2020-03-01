@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from rest_api.settings import DB_ENUM
-from records.models import TestRecord, TestResult, PGInfo, LinuxInfo, MetaInfo, TestDataSet, TestCategory, TestBranch
+from records.models import TestRecord, TestResult, PGInfo, LinuxInfo, MetaInfo, TestDataSet, TestScript, TestCategory, TestBranch
 from machines.models import Machine
 from machines.serializers import MachineSerializer, MachineRecordSerializer
 from django.db.models import Count
@@ -184,6 +184,11 @@ class CreateTestDateSetSerializer(serializers.ModelSerializer):
         model = TestDataSet
         fields = "__all__"
 
+class CreateTestScriptSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = TestScript
+        fields = "__all__"
 
 class TestStatusRecordListSerializer(serializers.ModelSerializer):
 

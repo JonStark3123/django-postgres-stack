@@ -205,8 +205,6 @@ def calc_status(sender, instance, **kwargs):
 
 class TestResult(models.Model):
     test_dataset = models.ForeignKey(TestDataSet, verbose_name="test dataset id", help_text="test dataset id")
-    # customScripts = models.CharField(max_length=10000, verbose_name="custom scripts",
-    #                                help_text="custom scripts", default="TPC-B")
     latency = models.IntegerField(verbose_name="latency", help_text="latency of the test result")
     scale = models.IntegerField(verbose_name="scale", help_text="scale of the test result")
     end = models.DecimalField(max_digits=32, decimal_places=12, verbose_name="end",
@@ -230,3 +228,17 @@ class TestResult(models.Model):
     class Meta:
         verbose_name = "test result"
         verbose_name_plural = "test result"
+
+
+class TestScript(models.Model):
+    test_result = models.ForeignKey(TestResult, verbose_name="test result id", help_text="test result id")
+    # customScripts = models.CharField(max_length=10000, verbose_name="custom scripts",
+    #                                help_text="custom scripts", default="TPC-B")
+    scriptName = models.CharField(max_length=100, verbose_name="custom scripts name",
+                                       help_text="custom scripts name", default="TPC-B")
+    script = models.FileField(verbose_name="custom scripts file", upload_to="scripts/")
+    add_time = models.DateTimeField(default=timezone.now, verbose_name="custom scripts list added time")
+
+    class Meta:
+        verbose_name = "custom script list"
+        verbose_name_plural = "custom script list"

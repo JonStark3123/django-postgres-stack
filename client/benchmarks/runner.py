@@ -139,13 +139,14 @@ class BenchmarkRunner(object):
 
     def _upload_results(self, results):
 
-        postdata = results
-        post = []
-        post.append(postdata)
-
-        headers = {'Content-Type': 'application/json; charset=utf-8', 'Authorization': self._secret}
-        # r = requests.post(self._url+"upload/".encode('utf-8'), data=json.dumps(post).encode('utf-8'), headers=headers)
-        r = requests.post(self._url.encode('utf-8'), data=json.dumps(post).encode('utf-8'), headers=headers)
+        PATH_URL = 'upload/'
+        url = self.url + PATH_URL
+        headers = {'Authorization': self._secret}
+        files = {
+            'json': (None, json.dumps(results), 'application/json'),
+            'file': (os.path.basename('insert.sql'), open('../tmp/files/insert.sql', 'rb'), 'application/octet-stream')
+        }
+        r = requests.post(url.encode('utf-8'), files=files, headers=headers)
 
     def run(self):
         'run all the configured benchmarks'

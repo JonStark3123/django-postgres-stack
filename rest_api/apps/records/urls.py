@@ -1,6 +1,11 @@
 from django.conf.urls import include, url
 from rest_framework.routers import DefaultRouter
 from records import views
+from rest_api import settings
+from django.views.static import serve
+from django.views.generic import TemplateView
+
+
 
 router = DefaultRouter()
 router.register(r'all-records', views.TestRecordListViewSet, base_name="records"),
@@ -12,5 +17,6 @@ router.register(r'machine-records', views.MachineHistoryRecordViewSet, base_name
 
 urlpatterns = [
 	url(r'^', include(router.urls)),
-	url(r'upload/$', views.TestRecordCreate, name="test-upload")
+	url(r'upload/$', views.TestRecordCreate, name="test-upload"),
+	url(r'scripts/(?P<path>.*)$', serve, {"document_root": settings.MEDIA_ROOT})#http://127.0.0.1:8000/scripts/scripts/insert.sql
 ]
