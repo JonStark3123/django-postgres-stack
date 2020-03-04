@@ -30,21 +30,29 @@ To allow user running custom scripts, not just the default read-write/read-only 
 | run_custem_script | return run_cmd result | run bgbench cmd like  "pgbench -f a.sql -f b.sql -f … dbname" | scripts collect with some method use for scriptcollection and jsonFormat.
 |getScriptListJson|json|perpare custome script information json 
 
-### upload json 
-we add a `customeScript` JsonObject to descrip custem scriptt result.
+### upload json and file 
+#### jsona part
+1. we add a `customeScript` JsonObject to descrip custem scriptt result.
 
 ![-w635](media/15833156303321/15833213432675.jpg)
-* if with no custem script situation,the `customeScript` is a empty JsonObject.
+* if with no custom script situation,the `customeScript` is a empty JsonObject.
 
-### service part 
-1. add `customeScript` type  in `testCategory` table.
+#### file part
+ the customeScript sql files are also be uploaded to the server.
+![-w430](media/15833305887002/15833309384177.jpg)
+
+
+### server part 
+1. add `customeScript` and complete the related Django rest framwork
+![-w1164](media/15833305887002/15833309564906.jpg)
+
+2. add `customeScript` type  in `testCategory` table in the database.
 ![](media/15833156303321/15833221918648.jpg)
-1. upload result in db(6 indicate is a customeScript type)
+3. upload result in db(6 indicate is a customeScript type)
 ![](media/15833156303321/15833222762576.jpg)
 
-1. script file save in db. 
+4. script files are saved in db. 
  ![-w973](media/15833156303321/15833223950597.jpg)
-
 
 
 
@@ -52,7 +60,8 @@ we add a `customeScript` JsonObject to descrip custem scriptt result.
 add GUI for command line for environment setups.
 
 # PR summary
-1. how to debugge in project and fix it.
-2. To know what tps is.
-3. pgbench simple usetage.
-4. how to upload file and save by django.
+![-w1440](media/15833305887002/15833311858097.jpg)
+
+ ![-w1026](media/15833305887002/15833310988582.jpg)
+![screencapture-github-chouchouyu-django-postgres-stack-commits-wsm-2020-03-04-21_59_12](media/15833305887002/screencapture-github-chouchouyu-django-postgres-stack-commits-wsm-2020-03-04-21_59_12.png)
+
