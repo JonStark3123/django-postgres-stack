@@ -31,7 +31,7 @@ To allow user running custom scripts, not just the default read-write/read-only 
 |getScriptListJson|json|perpare custome script information json 
 
 ### upload 
-* jsona part
+* json part
  we add a `customeScript` JsonObject to descrip custem scriptt result.
     if with no custom script situation,the `customeScript` is a empty JsonObject.
 
