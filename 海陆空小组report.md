@@ -49,7 +49,7 @@ we add a `customeScript` JsonObject to descrip custem scriptt result.
 
 
 # Future work
-add GUI for command line environment setups.
+add GUI for command line for environment setups.
 
 # PR summary
 1. how to debugge in project and fix it.
