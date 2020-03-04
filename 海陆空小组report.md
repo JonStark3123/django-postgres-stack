@@ -20,6 +20,7 @@ To allow user running custom scripts, not just the default read-write/read-only 
 ## Implementation Details
 
 ###[client/collectors/scripts.py](https://github.com/chouchouyu/django-postgres-stack/blob/wsm/client/collectors/scripts.py) 
+
 `scripts.py` is the main class for collecting scripts , run cmd and generate upload json.
 
 
