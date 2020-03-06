@@ -16,21 +16,21 @@ with open("/home/guo/PythonClass/results_script1.json", 'r') as load_f:
 # files = {
 #     'json': (None, json.dumps(load_data), 'application/json'),
 #     'file': [
-#         {(os.path.basename('insert.sql'), open('../tmp/files/insert.sql', 'rb'), 'application/octet-stream')},
-#         {(os.path.basename('test.sql'), open('../tmp/files/test.sql', 'rb'), 'application/octet-stream')}]
+#         {(os.path.basename('insert.sql'), open('../scripts/files/insert.sql', 'rb'), 'application/octet-stream')},
+#         {(os.path.basename('test.sql'), open('../scripts/files/test.sql', 'rb'), 'application/octet-stream')}]
 # }
 
 files = {
     'json': (None, json.dumps(load_data), 'application/json'),
-    'insert.sql': open('../tmp/files/insert.sql', 'rb'),
-    'test.sql': open('../tmp/files/test.sql', 'rb')
+    'insert.sql': open('../scripts/files/insert.sql', 'rb'),
+    'test.sql': open('../scripts/files/test.sql', 'rb')
 }
 # files = {
 #      'json': (None, json.dumps(load_data), 'application/json'),
-#      'file': (os.path.basename('insert.sql'), open('../tmp/files/insert.sql', 'rb'), 'application/octet-stream')
+#      'file': (os.path.basename('insert.sql'), open('../scripts/files/insert.sql', 'rb'), 'application/octet-stream')
 # }
-# files = {'insert.sql': open('../tmp/files/insert.sql', 'rb'),
-#          'test.sql': open('../tmp/files/test.sql', 'rb')}
+# files = {'insert.sql': open('../scripts/files/insert.sql', 'rb'),
+#          'test.sql': open('../scripts/files/test.sql', 'rb')}
 # r = requests.post(url.encode('utf-8'), data=json.dumps(post).encode('utf-8'), files=files, headers=headers)
 # r = requests.post(url.encode('utf-8'), data=load_data, files=files, headers=headers)
 # r = requests.post(url.encode('utf-8'), data=(None, json.dumps(load_data), 'application/json'), files=files, headers=headers)
