@@ -35,7 +35,7 @@ OUTPUT_DIR = '/raid/perf-output'
 # duration - duration (in seconds) of a single benchmark (per client count)
 PGBENCH_CONFIG = {
     'runs': 3,
-    'duration': 600,
+    'duration': 6,#600
     'csv': False
 }
 
