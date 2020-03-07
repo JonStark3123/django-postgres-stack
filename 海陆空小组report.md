@@ -27,7 +27,7 @@ To allow user running custom scripts, not just the default read-write/read-only 
 |method   | result  | description|
 | --- | --- | --- |
 | hasScript | Ture/False | if custom script dir exist and with sql file in it return true,or else return false |
-| run_custem_script | return run_cmd result | run bgbench cmd like  "pgbench -f a.sql -f b.sql -f … dbname" | scripts collect with some method use for scriptcollection and jsonFormat.
+| run_custom_script | return run_cmd result | run bgbench cmd like  "pgbench -f a.sql -f b.sql -f … dbname" | scripts collect with some method use for scriptcollection and jsonFormat.
 |getScriptListJson|json|perpare custome script information json 
 
 ### upload 
