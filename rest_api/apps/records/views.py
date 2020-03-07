@@ -269,9 +269,9 @@ def TestRecordCreate(request, format=None):
                                         'test_record': testRecordRet.id,
                                         'clients': client_num,
                                         'scale': scale,
-                                        'std': round(dataset['std'], 8),
-                                        'metric': round(dataset['metric'], 8),
-                                        'median': dataset['median'],
+                                        'std': round(dataset['std'], 7),
+                                        'metric': round(dataset['metric'], 7),
+                                        'median': round(dataset['median'], 7),
                                         'test_cate': test_cate.id,
                                         # status, percentage will calc by receiver
                                         'status': -1,
@@ -329,9 +329,9 @@ def TestRecordCreate(request, format=None):
                                 'test_record': testRecordRet.id,
                                 'clients': client_num,
                                 'scale': scale,
-                                'std': round(dataset['std'], 8),
-                                'metric': round(dataset['metric'], 8),
-                                'median': dataset['median'],
+                                'std': round(dataset['std'], 7),
+                                'metric': round(dataset['metric'], 7),
+                                'median': round(dataset['median'], 7),
                                 'test_cate': test_cate.id,
                                 # status, percentage will calc by receiver
                                 'status': -1,
@@ -354,6 +354,7 @@ def TestRecordCreate(request, format=None):
                                 test_result_data = test_result
                                 test_result_data['test_dataset'] = testDateSetRet.id
                                 test_result_data['mode'] = DB_ENUM['mode'][test_result_data['mode']]
+                                test_result_data['run'] = 0
                                 testResult = CreateTestResultSerializer(data=test_result_data)
 
                                 testResultRet = None

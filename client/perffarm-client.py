@@ -20,13 +20,14 @@ from utils import logging
 from settings_local import *
 from settings import *
 API_URL = 'http://127.0.0.1:8000/'
-MACHINE_SECRET = 'e984c3017cd1a0dff0ef9f0c394a5c285e421411' #This machine secrete is specific to my environment
+MACHINE_SECRET = 'e984c3017cd1a0dff0ef9f0c394a5c285e421411'
+
 if __name__ == '__main__':
 
     with FileLock('.lock') as lock:
 
         if not(os.path.exists(REPOSITORY_PATH)):
-            os.mkdir(REPOSITORY_PATH)
+            os.makedirs(REPOSITORY_PATH)
 
         '''
         if not(os.path.exists(BIN_PATH)):
@@ -68,6 +69,10 @@ if __name__ == '__main__':
         # register one config for each benchmark (should be moved to a config
         # file)
         PGBENCH_CONFIG['results_dir'] = OUTPUT_DIR
+        # register user options as config
+        if PGBENCH_BENCHMARKING_OPTIONS:
+            PGBENCH_CONFIG['benchmark_options'] = PGBENCH_BENCHMARKING_OPTIONS
+
         runner.register_config('pgbench-basic',
                                'pgbench',
                                repository.current_branch(),
