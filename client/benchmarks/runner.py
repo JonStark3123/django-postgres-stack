@@ -144,12 +144,12 @@ class BenchmarkRunner(object):
     def _upload_results(self, results):
 
         PATH_URL = 'upload/'
-        url = self.url + PATH_URL
+        url = self._url + PATH_URL
         headers = {'Authorization': self._secret}
         files = {
             'json': (None, json.dumps(results), 'application/json'),
-            'insert.sql': open('../scripts/files/insert.sql', 'rb'),
-            'test.sql': open('../scripts/files/test.sql', 'rb')
+            'insert.sql': open('scripts/files/insert.sql', 'rb'),
+            'test.sql': open('scripts/files/test.sql', 'rb')
         }
         r = requests.post(url.encode('utf-8'), files=files, headers=headers)
 

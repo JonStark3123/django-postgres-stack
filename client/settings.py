@@ -3,13 +3,13 @@ import sys
 
 # global configuration/Users/chenzhang
 # GIT_URL = 'https://github.com/postgres/postgres.git'
-GIT_URL = 'https://gitee.com/purpleyu/postgres.git' #changed to a local repo
+GIT_URL = 'https://gitee.com/purpleyu/postgres.git'  # changed to a local repo
 REPOSITORY_PATH = '/raid/git-postgres'
 # BUILD_PATH = '/Users/chenzhang/anaconda3'
 BUILD_PATH = '/usr/lib/postgresql/11'
 BIN_PATH = os.path.join(BUILD_PATH, 'bin')
 DATADIR_PATH = '/raid/data-postgres'
-SCRIPTS_DIR='scripts/files/'
+SCRIPTS_DIR = 'scripts/files/'
 
 POSTGRES_CONFIG = {
     'shared_buffers': '1GB',
@@ -25,17 +25,16 @@ POSTGRES_CONFIG = {
     'checkpoint_completion_target': '0.9',
 }
 
-DATABASE_NAME = 'postgres' # This name needs to be the same as rest_api settings_local.py database NAME
+DATABASE_NAME = 'postgres'  # This name needs to be the same as rest_api settings_local.py database NAME
 
 OUTPUT_DIR = '/raid/perf-output'
-
 
 # configuration for PgBench
 # runs - number of repetitions (including test for all client counts)
 # duration - duration (in seconds) of a single benchmark (per client count)
 PGBENCH_CONFIG = {
     'runs': 3,
-    'duration': 6,#600
+    'duration': 1,  # 600
     'csv': False
 }
 
@@ -44,7 +43,7 @@ PGBENCH_CONFIG = {
 # threads - number of worker threads within PgBench
 PGBENCH_BENCHMARKING_OPTIONS = {
     'scale': 10,
-    'clients': [2, 4, 8],
+    'clients': [1, 2, 4],
     'threads': 1
 }
 
@@ -52,6 +51,6 @@ PGBENCH_BENCHMARKING_OPTIONS = {
 try:
     from settings_local import *
 except Exception as e:
-    print (sys.stderr, "ERROR: local configuration (settings_local.py) " \
-                         "not found")
+    print(sys.stderr, "ERROR: local configuration (settings_local.py) " \
+                      "not found")
     sys.exit(1)
