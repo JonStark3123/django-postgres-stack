@@ -29,7 +29,7 @@ class Machine(models.Model):
 
 	add_time = models.DateTimeField(auto_now_add=True)
 	alias = models.CharField(max_length=100, blank=True, default='')
-	machine_secret = models.CharField(max_length=32, blank=True, default='', verbose_name="machine secret")
+	machine_secret = models.CharField(max_length=100, blank=True, default='', verbose_name="machine secret")
 	sn = models.CharField(max_length=16, blank=True, default='')
 	os_name = models.CharField(max_length=100, blank=True, default='')
 	os_version = models.CharField(max_length=100, blank=True, default='')
