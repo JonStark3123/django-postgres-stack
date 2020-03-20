@@ -1,6 +1,10 @@
 import os
+<<<<<<< HEAD
 import rrdtool
 import os
+=======
+
+>>>>>>> d6388beb7f6f23fe6b08843c7c133888b970d3f5
 from utils.logging import log
 from utils.misc import run_cmd
 
@@ -35,9 +39,12 @@ class CollectdCollector(object):
             'LoadPlugin postgresql\n'
             'LoadPlugin processes\n'
             'LoadPlugin swap\n'
+<<<<<<< HEAD
 	        'LoadPlugin rrdtool\n'
 	    
 
+=======
+>>>>>>> d6388beb7f6f23fe6b08843c7c133888b970d3f5
         )
 
         system = os.popen("uname").readlines()[0].split()[0]
@@ -46,7 +53,10 @@ class CollectdCollector(object):
             modules += (
                 'LoadPlugin ipc\n'
                 'LoadPlugin vmem\n'
+<<<<<<< HEAD
                 'LoadPlugin syslog\n'
+=======
+>>>>>>> d6388beb7f6f23fe6b08843c7c133888b970d3f5
             )
 
         outdir = '%s/stats' % outdir
@@ -73,6 +83,7 @@ class CollectdCollector(object):
             pid = pidfile.read().strip()
             run_cmd(['kill', pid])
         except FileNotFoundError:
+<<<<<<< HEAD
             print('collectd pid not found - processes may still be running')
 
 
@@ -124,6 +135,12 @@ class CollectdCollector(object):
                "cpu_user":str(getaverage(a7)),
                "cpu_wait": str(getaverage(a8)),
                }
+=======
+            log('collectd pid not found - processes may still be running')
+
+    def result(self):
+        return {}
+>>>>>>> d6388beb7f6f23fe6b08843c7c133888b970d3f5
 
 
 def run_collector(in_queue, out_queue, dbname, bin_path, outdir, interval=1.0):

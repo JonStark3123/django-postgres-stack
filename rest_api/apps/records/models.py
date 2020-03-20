@@ -69,6 +69,7 @@ class PGInfo(models.Model):
         verbose_name = "pg info"
         verbose_name_plural = "pg info"
 
+<<<<<<< HEAD
 class CollectdInfo(models.Model):
     """
     collectd info
@@ -88,6 +89,8 @@ class CollectdInfo(models.Model):
         verbose_name = "collectd info"
         verbose_name_plural = "collectd info"
 
+=======
+>>>>>>> d6388beb7f6f23fe6b08843c7c133888b970d3f5
 
 class MetaInfo(models.Model):
     """
@@ -111,7 +114,10 @@ class LinuxInfo(models.Model):
     cpuinfo = models.TextField(verbose_name="cpuinfo", help_text="cpuinfo", default="null")
     sysctl = models.TextField(verbose_name="sysctl", help_text="sysctl", default="null")
     meminfo = models.TextField(verbose_name="meminfo", help_text="meminfo", default="null")
+<<<<<<< HEAD
     stat = models.TextField(verbose_name="stat", help_text="stat", default="null")
+=======
+>>>>>>> d6388beb7f6f23fe6b08843c7c133888b970d3f5
 
     class Meta:
         verbose_name = "linux info"
@@ -131,14 +137,21 @@ class TestRecord(models.Model):
     pg_info = models.ForeignKey(PGInfo, verbose_name="pg info", help_text="pg info")
     meta_info = models.ForeignKey(MetaInfo, verbose_name="meta info", help_text="meta info")
     linux_info = models.ForeignKey(LinuxInfo, verbose_name="linux info", help_text="linux info")
+<<<<<<< HEAD
     collectd_info = models.ForeignKey(CollectdInfo, verbose_name="collectd info",default='100', help_text="collectd info")
+=======
+>>>>>>> d6388beb7f6f23fe6b08843c7c133888b970d3f5
     test_desc = models.TextField(verbose_name="test desc", help_text="test desc")
     # test_branch_id = models.ForeignKey(TestBranch, verbose_name="test category", help_text="test category")
     meta_time = models.DateTimeField(default=timezone.now, verbose_name="meta time")
     hash = models.CharField(unique=True, default='', max_length=128, verbose_name="record hash",
                             help_text="record hash")
     uuid = models.CharField(unique=True, default='', max_length=64, verbose_name="record uuid", help_text="record uuid")
+<<<<<<< HEAD
     commit = models.CharField(max_length=200, verbose_name="record commit", help_text="record commit")
+=======
+    commit = models.CharField(max_length=64, verbose_name="record commit", help_text="record commit")
+>>>>>>> d6388beb7f6f23fe6b08843c7c133888b970d3f5
 
     add_time = models.DateTimeField(default=timezone.now, verbose_name="test added time")
 

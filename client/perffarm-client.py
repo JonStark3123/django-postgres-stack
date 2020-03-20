@@ -19,7 +19,11 @@ from utils import logging
 
 from settings_local import *
 from settings import *
+<<<<<<< HEAD
 API_URL = 'http://127.0.0.1:8000/upload/'
+=======
+API_URL = 'http://127.0.0.1:8000/'
+>>>>>>> d6388beb7f6f23fe6b08843c7c133888b970d3f5
 MACHINE_SECRET = '610f79063e62e6ad09460ac2c4e66da0386dc89b'
 if __name__ == '__main__':
 

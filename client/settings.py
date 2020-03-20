@@ -4,7 +4,11 @@ import sys
 # global configuration
 GIT_URL = 'https://github.com/postgres/postgres.git'
 REPOSITORY_PATH = '/tmp/git-postgres'
+<<<<<<< HEAD
 BUILD_PATH = '/usr/lib/postgresql/11'
+=======
+BUILD_PATH = '/Users/chenzhang/anaconda3'
+>>>>>>> d6388beb7f6f23fe6b08843c7c133888b970d3f5
 BIN_PATH = os.path.join(BUILD_PATH, 'bin')
 DATADIR_PATH = '/tmp/data-postgres'
 
@@ -22,7 +26,11 @@ POSTGRES_CONFIG = {
     'checkpoint_completion_target': '0.9',
 }
 
+<<<<<<< HEAD
 DATABASE_NAME = 'pgperffarm-db' # This name needs to be the same as rest_api settings_local.py database NAME
+=======
+DATABASE_NAME = 'postgres' # This name needs to be the same as rest_api settings_local.py database NAME
+>>>>>>> d6388beb7f6f23fe6b08843c7c133888b970d3f5
 
 OUTPUT_DIR = '/tmp/perf-output'
 

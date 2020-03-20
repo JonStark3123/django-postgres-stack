@@ -111,18 +111,26 @@ def TestRecordCreate(request, format=None):
 	json_data = json.dumps(data[0], ensure_ascii=False)
 	json_data = json.loads(json_data)
 
+<<<<<<< HEAD
 
 	from django.db import transaction
 	
 
 	try:
 
+=======
+	from django.db import transaction
+	try:
+>>>>>>> d6388beb7f6f23fe6b08843c7c133888b970d3f5
 		secret = request.META.get("HTTP_AUTHORIZATION")
 		print(secret)
 		test_machine = None
 		try:
+<<<<<<< HEAD
 			print("1")
 			
+=======
+>>>>>>> d6388beb7f6f23fe6b08843c7c133888b970d3f5
 			ret = Machine.objects.filter(machine_secret=secret).get()
 			test_machine = ret.id
 		except Machine.DoesNotExist:
@@ -143,11 +151,17 @@ def TestRecordCreate(request, format=None):
 		with transaction.atomic():
 
 			if 'linux' not in json_data:
+<<<<<<< HEAD
 				print("no")
 				linuxInfo = LinuxInfoSerializer(data={'mounts': 'none', 'cpuinfo': 'none', 'sysctl': 'none', 'meminfo': 'none','stat':'none'})
 
 			else:
 				print("yes")
+=======
+				linuxInfo = LinuxInfoSerializer(data={'mounts': 'none', 'cpuinfo': 'none', 'sysctl': 'none', 'meminfo': 'none'})
+
+			else:
+>>>>>>> d6388beb7f6f23fe6b08843c7c133888b970d3f5
 				linux_data = json_data['linux']
 				linuxInfo = LinuxInfoSerializer(data=linux_data)
 				linuxInfoRet = None
@@ -158,17 +172,24 @@ def TestRecordCreate(request, format=None):
 			else:
 				msg = 'linuxInfo invalid'
 				raise TestDataUploadError(msg)
+<<<<<<< HEAD
 
 			meta_data = json_data['meta']
 			metaInfo = MetaInfoSerializer(data=meta_data)
 			metaInfoRet = None
 
+=======
+			meta_data = json_data['meta']
+			metaInfo = MetaInfoSerializer(data=meta_data)
+			metaInfoRet = None
+>>>>>>> d6388beb7f6f23fe6b08843c7c133888b970d3f5
 			if metaInfo.is_valid():
 				metaInfoRet = metaInfo.save()
 			else:
 				msg = 'metaInfo invalid'
 				raise TestDataUploadError(msg)
 
+<<<<<<< HEAD
 			collectd_data=json_data['collectd']
 			collectdInfo=CollectdInfoSerializer(data=collectd_data)
 			collectdInfoRet=None
@@ -179,6 +200,8 @@ def TestRecordCreate(request, format=None):
 				msg = 'collectdInfo invalid'
 				raise TestDataUploadError(msg)
 
+=======
+>>>>>>> d6388beb7f6f23fe6b08843c7c133888b970d3f5
 			pg_data = json_data['postgres']
 			branch_str = pg_data['branch']
 
@@ -220,7 +243,10 @@ def TestRecordCreate(request, format=None):
 			test_record_data = {
 				'pg_info': pgInfoRet.id,
 				'linux_info': linuxInfoRet.id,
+<<<<<<< HEAD
 			   'collectd_info':collectdInfoRet.id,
+=======
+>>>>>>> d6388beb7f6f23fe6b08843c7c133888b970d3f5
 				'meta_info': metaInfoRet.id,
 				'test_machine': test_machine,
 				'test_desc': 'here is desc',
@@ -230,6 +256,7 @@ def TestRecordCreate(request, format=None):
 				'branch': branch.id,
 				'uuid': shortuuid.uuid()
 			}
+<<<<<<< HEAD
 			print("yes1")
 			testRecord = CreateTestRecordSerializer(data=test_record_data)
 			testRecordRet = None
@@ -247,6 +274,20 @@ def TestRecordCreate(request, format=None):
 				print("yes7")
 				raise TestDataUploadError(msg)
 			print("yes3")
+=======
+
+			testRecord = CreateTestRecordSerializer(data=test_record_data)
+			testRecordRet = None
+
+			if testRecord.is_valid():
+				testRecordRet = testRecord.save()
+
+			else:
+				msg = 'testRecord invalid'
+				print(testRecord.errors)
+				raise TestDataUploadError(msg)
+
+>>>>>>> d6388beb7f6f23fe6b08843c7c133888b970d3f5
 			pgbench = json_data['pgbench']
 			# print(type(ro))
 			ro = pgbench['ro']
