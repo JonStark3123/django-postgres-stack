@@ -52,10 +52,9 @@ class LinuxCollector(object):
         with open('/proc/mounts', 'r') as f:
             system['mounts'] = f.read()
 
-<<<<<<< HEAD
-        with open('/proc/stat', 'r') as f:
+
+        with open('/proc/stat', 'r') as f:   
             system['stat'] = f.read()
 
-=======
->>>>>>> d6388beb7f6f23fe6b08843c7c133888b970d3f5
+
         return system
