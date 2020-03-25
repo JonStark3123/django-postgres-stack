@@ -31,13 +31,9 @@ Interval    60
 LoadPlugin logfile
 
 <Plugin logfile>
-<<<<<<< HEAD
-	LogLevel debug
-	File "/tmp/collectd.json.log"
-=======
+
 	LogLevel info
 	File STDOUT
->>>>>>> d6388beb7f6f23fe6b08843c7c133888b970d3f5
 	Timestamp true
 	PrintSeverity false
 </Plugin>
@@ -423,7 +419,7 @@ FROM pg_stat_bgwriter;"
 	ValuesPercentage false
 </Plugin>
 
-<<<<<<< HEAD
+
 <Plugin rrdtool>
 	DataDir "/var/lib/collectd/rrd"
  	CacheFlush 120
@@ -440,8 +436,8 @@ FROM pg_stat_bgwriter;"
 </Plugin>
 
 
-=======
+
 <Plugin vmem>
 	Verbose false
 </Plugin>
->>>>>>> d6388beb7f6f23fe6b08843c7c133888b970d3f5
+
