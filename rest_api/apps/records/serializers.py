@@ -1,11 +1,9 @@
 from rest_framework import serializers
 
 from rest_api.settings import DB_ENUM
-<<<<<<< HEAD
+
 from records.models import TestRecord, TestResult, PGInfo, LinuxInfo, MetaInfo, TestDataSet, TestCategory, TestBranch, CollectdInfo
-=======
-from records.models import TestRecord, TestResult, PGInfo, LinuxInfo, MetaInfo, TestDataSet, TestCategory, TestBranch
->>>>>>> d6388beb7f6f23fe6b08843c7c133888b970d3f5
+
 from machines.models import Machine
 from machines.serializers import MachineSerializer, MachineRecordSerializer
 from django.db.models import Count
@@ -146,9 +144,7 @@ class CollectdInfoSerializer(serializers.ModelSerializer):
     class  Meta:
         model = CollectdInfo
         fields = ('cpu_idle', 'cpu_interrupt', 'cpu_nice','cpu_softirq','cpu_steal','cpu_system','cpu_user','cpu_wait')
-=======
-        fields = ('mounts', 'cpuinfo', 'sysctl', 'meminfo')
->>>>>>> d6388beb7f6f23fe6b08843c7c133888b970d3f5
+
 
 
 class MetaInfoDetailSerializer(serializers.ModelSerializer):
@@ -189,16 +185,14 @@ class CreateTestRecordSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = TestRecord
-<<<<<<< HEAD
+
         fields =('pg_info','linux_info','collectd_info','meta_info','test_machine','test_desc',
 				'meta_time',
 				'hash',
 				'commit',
 				'branch',
 				'uuid')
-=======
-        fields = "__all__"
->>>>>>> d6388beb7f6f23fe6b08843c7c133888b970d3f5
+
 
 
 class CreateTestDateSetSerializer(serializers.ModelSerializer):
@@ -212,10 +206,8 @@ class TestStatusRecordListSerializer(serializers.ModelSerializer):
 
     pg_info = PGInfoSerializer()
     linux_info = LinuxInfoSerializer()
-<<<<<<< HEAD
     collectd_info=CollectdInfoSerializer()
-=======
->>>>>>> d6388beb7f6f23fe6b08843c7c133888b970d3f5
+
     meta_info = MetaInfoSerializer()
     branch = serializers.SerializerMethodField()
     trend = serializers.SerializerMethodField()
@@ -224,11 +216,9 @@ class TestStatusRecordListSerializer(serializers.ModelSerializer):
     # client_max_num = serializers.SerializerMethodField()
     class Meta:
         model = TestRecord
-<<<<<<< HEAD
+
         fields = ('uuid', 'add_time', 'machine_info', 'pg_info', 'branch', 'trend', 'linux_info','collectd_info', 'meta_info')
-=======
-        fields = ('uuid', 'add_time', 'machine_info', 'pg_info', 'branch', 'trend', 'linux_info', 'meta_info')
->>>>>>> d6388beb7f6f23fe6b08843c7c133888b970d3f5
+
 
     def get_branch(self, obj):
         branch = TestBranch.objects.filter(id=obj.branch.id).first()
@@ -278,10 +268,9 @@ class TestRecordListSerializer(serializers.ModelSerializer):
 
     pg_info = PGInfoSerializer()
     linux_info = LinuxInfoSerializer()
-<<<<<<< HEAD
+
     collectd_info=CollectdInfoSerializer()
-=======
->>>>>>> d6388beb7f6f23fe6b08843c7c133888b970d3f5
+
     meta_info = MetaInfoSerializer()
     branch = serializers.SerializerMethodField()
     trend = serializers.SerializerMethodField()
@@ -336,21 +325,17 @@ class TestRecordLastestSerializer(serializers.ModelSerializer):
 
     pg_info = PGInfoSerializer()
     linux_info = LinuxInfoSerializer()
-<<<<<<< HEAD
+
     collectd_info=CollectdInfoSerializer()
-=======
->>>>>>> d6388beb7f6f23fe6b08843c7c133888b970d3f5
     meta_info = MetaInfoSerializer()
     branch = serializers.SerializerMethodField()
     trend = serializers.SerializerMethodField()
 
     class Meta:
         model = TestRecord
-<<<<<<< HEAD
+
         fields = ('uuid', 'add_time', 'branch', 'trend', 'linux_info','collectd_info', 'meta_info', 'pg_info', 'commit')
-=======
-        fields = ('uuid', 'add_time', 'branch', 'trend', 'linux_info', 'meta_info', 'pg_info', 'commit')
->>>>>>> d6388beb7f6f23fe6b08843c7c133888b970d3f5
+
 
 
     def get_branch(self, obj):
@@ -408,10 +393,8 @@ class TestRecordDetailSerializer(serializers.ModelSerializer):
     date = serializers.SerializerMethodField()
     pg_info = PGInfoSerializer()
     linux_info = LinuxInfoDetailSerializer()
-<<<<<<< HEAD
     collectd_info=CollectdInfoSerializer()
-=======
->>>>>>> d6388beb7f6f23fe6b08843c7c133888b970d3f5
+
     test_machine = MachineSerializer()
     hardware_info = serializers.SerializerMethodField()
     meta_info = MetaInfoDetailSerializer()
@@ -421,11 +404,9 @@ class TestRecordDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = TestRecord
         fields = (
-<<<<<<< HEAD
+
             'branch', 'date', 'uuid', 'pg_info', 'linux_info','collectd_info', 'hardware_info', 'meta_info', 'dataset_info',
-=======
-            'branch', 'date', 'uuid', 'pg_info', 'linux_info', 'hardware_info', 'meta_info', 'dataset_info',
->>>>>>> d6388beb7f6f23fe6b08843c7c133888b970d3f5
+
             'test_desc', 'meta_time', 'test_machine', 'commit', 'prev')
 
     def get_prev(self, obj):
