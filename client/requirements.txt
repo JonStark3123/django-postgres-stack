@@ -1,6 +1,4 @@
 psycopg2==2.7.3.1
 simplejson==3.16.0
-<<<<<<< HEAD
 rrdtool==0.1.15
-=======
->>>>>>> d6388beb7f6f23fe6b08843c7c133888b970d3f5
+
