@@ -143,7 +143,9 @@ class BenchmarkRunner(object):
         post.append(postdata)
 
         headers = {'Content-Type': 'application/json; charset=utf-8', 'Authorization': self._secret}
-        r = requests.post(self._url.encode('utf-8'), data=json.dumps(post).encode('utf-8'), headers=headers)
+        # Write a function/class/module in here to check if the data in post has certain field (e.g., the stats value are non-negative)
+        # Write a function to parse the url, and display the IP address, port number, and rest of the URL in the terminal. 
+        #r = requests.post(self._url.encode('utf-8'), data=json.dumps(post).encode('utf-8'), headers=headers)
 
 
     def run(self):
