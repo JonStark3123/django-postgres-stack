@@ -111,12 +111,18 @@ def TestRecordCreate(request, format=None):
 	json_data = json.dumps(data[0], ensure_ascii=False)
 	json_data = json.loads(json_data)
 
+
 	from django.db import transaction
+	
+
 	try:
+
+
 		secret = request.META.get("HTTP_AUTHORIZATION")
 		print(secret)
 		test_machine = None
 		try:
+
 			ret = Machine.objects.filter(machine_secret=secret).get()
 			test_machine = ret.id
 		except Machine.DoesNotExist:
@@ -137,9 +143,13 @@ def TestRecordCreate(request, format=None):
 		with transaction.atomic():
 
 			if 'linux' not in json_data:
-				linuxInfo = LinuxInfoSerializer(data={'mounts': 'none', 'cpuinfo': 'none', 'sysctl': 'none', 'meminfo': 'none'})
+
+				
+				linuxInfo = LinuxInfoSerializer(data={'mounts': 'none', 'cpuinfo': 'none', 'sysctl': 'none', 'meminfo': 'none','stat':'none'})
 
 			else:
+				
+
 				linux_data = json_data['linux']
 				linuxInfo = LinuxInfoSerializer(data=linux_data)
 				linuxInfoRet = None
@@ -150,13 +160,28 @@ def TestRecordCreate(request, format=None):
 			else:
 				msg = 'linuxInfo invalid'
 				raise TestDataUploadError(msg)
+
+
 			meta_data = json_data['meta']
 			metaInfo = MetaInfoSerializer(data=meta_data)
 			metaInfoRet = None
+
+
 			if metaInfo.is_valid():
 				metaInfoRet = metaInfo.save()
 			else:
 				msg = 'metaInfo invalid'
+				raise TestDataUploadError(msg)
+
+
+			collectd_data=json_data['collectd']
+			collectdInfo=CollectdInfoSerializer(data=collectd_data)
+			collectdInfoRet=None
+
+			if collectdInfo.is_valid():
+				collectdInfoRet = collectdInfo.save()
+			else:
+				msg = 'collectdInfo invalid'
 				raise TestDataUploadError(msg)
 
 			pg_data = json_data['postgres']
@@ -200,6 +225,9 @@ def TestRecordCreate(request, format=None):
 			test_record_data = {
 				'pg_info': pgInfoRet.id,
 				'linux_info': linuxInfoRet.id,
+
+			   'collectd_info':collectdInfoRet.id,
+
 				'meta_info': metaInfoRet.id,
 				'test_machine': test_machine,
 				'test_desc': 'here is desc',
@@ -210,16 +238,21 @@ def TestRecordCreate(request, format=None):
 				'uuid': shortuuid.uuid()
 			}
 
+			
 			testRecord = CreateTestRecordSerializer(data=test_record_data)
 			testRecordRet = None
-
 			if testRecord.is_valid():
+				
 				testRecordRet = testRecord.save()
+				
 
 			else:
+				
 				msg = 'testRecord invalid'
 				print(testRecord.errors)
+				
 				raise TestDataUploadError(msg)
+			
 
 			pgbench = json_data['pgbench']
 			# print(type(ro))

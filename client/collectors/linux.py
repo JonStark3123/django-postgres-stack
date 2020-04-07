@@ -52,4 +52,9 @@ class LinuxCollector(object):
         with open('/proc/mounts', 'r') as f:
             system['mounts'] = f.read()
 
+
+        with open('/proc/stat', 'r') as f:   
+            system['stat'] = f.read()
+
+
         return system

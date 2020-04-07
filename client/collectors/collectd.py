@@ -1,4 +1,5 @@
 import os
+import rrdtool
 
 from utils.logging import log
 from utils.misc import run_cmd
@@ -34,6 +35,10 @@ class CollectdCollector(object):
             'LoadPlugin postgresql\n'
             'LoadPlugin processes\n'
             'LoadPlugin swap\n'
+
+	    'LoadPlugin rrdtool\n'
+	    
+
         )
 
         system = os.popen("uname").readlines()[0].split()[0]
@@ -42,6 +47,8 @@ class CollectdCollector(object):
             modules += (
                 'LoadPlugin ipc\n'
                 'LoadPlugin vmem\n'
+                'LoadPlugin syslog\n'
+
             )
 
         outdir = '%s/stats' % outdir
@@ -68,10 +75,59 @@ class CollectdCollector(object):
             pid = pidfile.read().strip()
             run_cmd(['kill', pid])
         except FileNotFoundError:
-            log('collectd pid not found - processes may still be running')
+
+            print('collectd pid not found - processes may still be running')
+
+
 
     def result(self):
-        return {}
+        # with open('/tmp/collectd.json.log') as f:
+        #     collectdlog=f.read()
+        #
+        # return {"collectdlog":collectdlog}
+        def getaverage(a):
+            b = []
+            for i in a[2]:
+                for u in i:
+                    if u != None:
+                        b.append(u)
+            return (sum(b) / len(b))
+
+        path = "/var/lib/collectd/rrd/iris-VirtualBox/cpu-0"
+        path1 = os.path.join(path, 'cpu-idle.rrd')
+        a1 = rrdtool.fetch(path1, "AVERAGE")
+
+        path2 = os.path.join(path, 'cpu-interrupt.rrd')
+        a2 = rrdtool.fetch(path2, "AVERAGE")
+
+        path3 = os.path.join(path, "cpu-nice.rrd")
+        a3 = rrdtool.fetch(path3, "AVERAGE")
+
+        path4 = os.path.join(path, "cpu-softirq.rrd")
+        a4 = rrdtool.fetch(path4, "AVERAGE")
+
+        path5 = os.path.join(path, "cpu-steal.rrd")
+        a5 = rrdtool.fetch(path5, "AVERAGE")
+
+        path6 = os.path.join(path, "cpu-system.rrd")
+        a6 = rrdtool.fetch(path6, "AVERAGE")
+
+        path7 = os.path.join(path, "cpu-user.rrd")
+        a7 = rrdtool.fetch(path7, "AVERAGE")
+
+        path8 = os.path.join(path, "cpu-wait.rrd")
+        a8 = rrdtool.fetch(path8, "AVERAGE")
+
+        return{"cpu_idle":str(getaverage(a1)),
+               "cpu_interrupt":str(getaverage(a2)),
+               "cpu_nice":str(getaverage(a3)),
+               "cpu_softirq":str(getaverage(a4)),
+               "cpu_steal":str(getaverage(a5)),
+               "cpu_system":str(getaverage(a6)),
+               "cpu_user":str(getaverage(a7)),
+               "cpu_wait": str(getaverage(a8)),
+               }
+
 
 
 def run_collector(in_queue, out_queue, dbname, bin_path, outdir, interval=1.0):

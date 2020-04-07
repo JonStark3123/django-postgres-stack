@@ -31,6 +31,7 @@ Interval    60
 LoadPlugin logfile
 
 <Plugin logfile>
+
 	LogLevel info
 	File STDOUT
 	Timestamp true
@@ -418,6 +419,25 @@ FROM pg_stat_bgwriter;"
 	ValuesPercentage false
 </Plugin>
 
+
+<Plugin rrdtool>
+	DataDir "/var/lib/collectd/rrd"
+ 	CacheFlush 120
+  	WritesPerSecond 50
+</Plugin>
+
 <Plugin vmem>
 	Verbose false
 </Plugin>
+
+<Plugin syslog>
+	Loglevel info
+	NotifyLevel OKAY
+</Plugin>
+
+
+
+<Plugin vmem>
+	Verbose false
+</Plugin>
+
